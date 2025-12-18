@@ -10,7 +10,7 @@ export const connection = new Connection(RPC_URL, 'confirmed');
 
 // Constantes del proyecto
 export const DOGGY_MINT = new PublicKey('BS7HxRitaY5ipGfbek1nmatWLbaS9yoWRSEQzCb3pump');
-export const BURN_ADDRESS = new PublicKey('11111111111111111111111111111111');
+export const BURN_ADDRESS = new PublicKey('Burn111111111111111111111111111111111111111');
 export const DEV_WALLET = new PublicKey('3CsLCkKNEC9UrsycKdqo9BEPkBazgLWs52iNZbqjvXaQ');
 
 // Decimales del token DOGGY (ajustar si es diferente)
