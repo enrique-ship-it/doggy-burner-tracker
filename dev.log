@@ -1,0 +1,50 @@
+
+> doggy-burner-tracker@0.1.0 dev
+> next dev
+
+   ▲ Next.js 16.0.10 (Turbopack)
+   - Local:         http://localhost:3000
+   - Network:       http://192.168.68.145:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 683ms
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+ HEAD / 200 in 1784ms (compile: 1640ms, render: 143ms)
+ GET /?id=faa69e60-c875-4390-90b8-bef58bfa6dc5&vscodeBrowserReqId=1766108952988 200 in 42ms (compile: 13ms, render: 29ms)
+[API] Starting burn scan...
+ GET / 200 in 107ms (compile: 29ms, render: 79ms)
+[API] Starting burn scan...
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 2.1s (compile: 404ms, render: 1723ms)
+[API] Starting burn scan...
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 1066ms (compile: 13ms, render: 1053ms)
+[API] Starting burn scan...
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 1369ms (compile: 43ms, render: 1325ms)
+[API] Starting burn scan...
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 1126ms (compile: 6ms, render: 1119ms)
+[API] Starting burn scan...
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 1349ms (compile: 6ms, render: 1343ms)
+[API] Starting burn scan...
+ GET /api/burns 200 in 483ms (compile: 5ms, render: 478ms)
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found
+ GET /api/burns 200 in 992ms (compile: 7ms, render: 985ms)
+[Scanner] End of history. Total: 80 tx, 0 burns
+[Scanner] Total: 80 transactions scanned, 0 DOGGY burns found
+[API] Scan complete: 0 burns found

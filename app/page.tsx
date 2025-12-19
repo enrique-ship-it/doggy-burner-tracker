@@ -1,65 +1,126 @@
-import Image from "next/image";
+'use client';
+
+import Image from 'next/image';
+import { BurnLeaderboard } from '@/components/BurnLeaderboard';
+import { BurnStats } from '@/components/BurnStats';
+import { BurnInterface } from '@/components/BurnInterface';
+import { WalletLookup } from '@/components/WalletLookup';
+import { RecentBurns } from '@/components/RecentBurns';
+import { HowToBurn } from '@/components/HowToBurn';
+import { ClaimNFT } from '@/components/ClaimNFT';
+import { DonateButton } from '@/components/DonateButton';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="bg-burning-money">
+      <div className="bg-overlay">
+        
+        {/* HEADER */}
+        <header className="header-bimsness -mx-0 px-6 py-4 mb-8">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Image 
+                src="/doggy.png" 
+                alt="Doggy" 
+                width={50} 
+                height={50}
+                className="doggy-mascot-sm"
+              />
+              <div>
+                <h1 className="text-xl text-white font-bold">
+                  <span className="dollar-sign dollar-md mr-1">$</span>
+                  DOGGY BIMSNESS
+                </h1>
+                <p className="text-xs text-white/70">Burn Tracker Oficial</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <WalletMultiButton className="btn-win98 btn-navy" />
+            </div>
+          </div>
+        </header>
+
+        {/* MAIN CONTENT */}
+        <main className="max-w-6xl mx-auto px-4 pb-12">
+          
+          {/* HERO */}
+          <div className="text-center mb-12">
+            <Image 
+              src="/doggy.png" 
+              alt="Doggy Bimsness" 
+              width={200} 
+              height={200}
+              className="doggy-mascot-lg mx-auto mb-4"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <h2 className="title-meme mb-2">
+              <span className="fire-emoji">🔥</span> DOGGY BURN TRACKER <span className="fire-emoji">🔥</span>
+            </h2>
+            <p className="subtitle-meme mb-6">
+              donde los tokens vienen a morir (profesionalmente)
+            </p>
+          </div>
+
+          {/* STATS */}
+          <BurnStats />
+
+          {/* 2 COLUMN LAYOUT: BURN & LOOKUP */}
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* BURN INTERFACE */}
+            <BurnInterface />
+            
+            {/* WALLET LOOKUP */}
+            <WalletLookup />
+          </div>
+
+          {/* HOW TO BURN - Alternative method */}
+          <div className="mt-12">
+            <HowToBurn />
+          </div>
+
+          {/* LEADERBOARD */}
+          <div className="mt-12">
+            <BurnLeaderboard />
+          </div>
+
+          {/* CLAIM NFT */}
+          <div className="mt-12">
+            <ClaimNFT />
+          </div>
+
+          {/* RECENT BURNS */}
+          <div className="mt-12">
+            <RecentBurns />
+          </div>
+
+          {/* DONATE */}
+          <div className="mt-12">
+            <DonateButton />
+          </div>
+
+          {/* WARNING */}
+          <div className="warning-box mt-8">
+            <strong>⚠️ ADVERTENCIA:</strong> Quemar tokens es permanente y probablemente no es una buena decisión financiera. Pero tú ya lo sabías, ¿verdad?
+          </div>
+
+        </main>
+
+        {/* FOOTER */}
+        <footer className="disclaimer-footer">
+          <p>no es consejo financiero • probablemente nada • haz tu propia investigación</p>
+          <p className="mt-1">doggy bimsness club © 2024</p>
+          <p className="text-xs mt-2">
+            <a href="https://solscan.io" target="_blank" rel="noopener" className="hover:underline">
+              Ver en Solscan
+            </a>
+            {' • '}
+            <a href="/api/burns" target="_blank" className="hover:underline">
+              API
+            </a>
+          </p>
+        </footer>
+
+      </div>
     </div>
   );
 }

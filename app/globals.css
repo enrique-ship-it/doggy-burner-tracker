@@ -1,26 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
 @import "tailwindcss";
 
+/* ===========================================
+   DOGGY BIMSNESS - Design System v4
+   Estilo: Meme + Windows 98 + Burning Money
+   =========================================== */
+
+/* --- PALETA BIMSNESS --- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colores del traje */
+  --suit-navy: #1a365d;
+  --suit-navy-light: #2c5282;
+  --suit-navy-dark: #0f2342;
+  
+  /* Colores de la corbata */
+  --tie-red: #8b2942;
+  --tie-red-light: #a33d5a;
+  --tie-red-dark: #6b1f32;
+  
+  /* Dorados $ */
+  --gold: #c9a227;
+  --gold-dark: #8b6914;
+  --gold-light: #e8c84a;
+  
+  /* Verde dólar */
+  --dollar-green: #1e5631;
+  --dollar-green-light: #2d7a46;
+  
+  /* Fondo papel */
+  --paper: #f5e6c8;
+  --paper-dark: #e8d4a8;
+  
+  /* Windows 98 */
+  --win98-gray: #c0c0c0;
+  --win98-dark: #808080;
+  --win98-light: #ffffff;
+  --win98-shadow: #404040;
+  
+  /* Fuego */
+  --fire-orange: #ff6b35;
+  --fire-red: #dc2626;
+  --fire-yellow: #fbbf24;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* --- BASE --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Comic Neue', cursive, sans-serif;
+  color: #1a1a1a;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* ===========================================
+   FONDO DE BILLETES QUEMANDOSE
+   =========================================== */
+
+.bg-burning-money {
+  background-image: url('/bg-desktop.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .bg-burning-money {
+    background-image: url('/bg-mobile.jpg');
+  }
+}
+
+/* Overlay para legibilidad */
+.bg-overlay {
+  background: rgba(245, 230, 200, 0.85);
+  min-height: 100vh;
+}
+
+/* ===========================================
+   TIPOGRAFIA MEME
+   Comic Neue - legible pero meme
+   =========================================== */
+
+.title-meme {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--dollar-green);
+  text-shadow: 
+    2px 2px 0 var(--gold),
+    4px 4px 0 rgba(0,0,0,0.2);
+  letter-spacing: -0.02em;
+}
+
+.subtitle-meme {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--suit-navy);
+}
+
+.text-meme {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 400;
+}
+
+.text-meme-bold {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+}
+
+/* Números grandes estilo "stonks" */
+.number-stonks {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: var(--dollar-green);
+}
+
+.number-red {
+  color: var(--fire-red);
+}
+
+/* ===========================================
+   BOTONES WINDOWS 98
+   Navy (traje) y Rojo (corbata)
+   =========================================== */
+
+.btn-win98 {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 8px 20px;
+  cursor: pointer;
+  
+  /* Borde 3D Windows 98 */
+  border: none;
+  box-shadow: 
+    inset -2px -2px 0 var(--win98-shadow),
+    inset 2px 2px 0 var(--win98-light);
+  
+  /* Estado normal */
+  position: relative;
+  top: 0;
+  transition: all 0.05s;
+}
+
+.btn-win98:active {
+  box-shadow: 
+    inset 2px 2px 0 var(--win98-shadow),
+    inset -2px -2px 0 var(--win98-light);
+  top: 1px;
+}
+
+.btn-win98:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botón Navy (traje) - Primario */
+.btn-navy {
+  background: var(--suit-navy);
+  color: white;
+}
+
+.btn-navy:hover:not(:disabled) {
+  background: var(--suit-navy-light);
+}
+
+/* Botón Rojo (corbata) - Secundario/Danger */
+.btn-tie {
+  background: var(--tie-red);
+  color: white;
+}
+
+.btn-tie:hover:not(:disabled) {
+  background: var(--tie-red-light);
+}
+
+/* Botón Dorado - Especial */
+.btn-gold {
+  background: var(--gold);
+  color: #1a1a1a;
+}
+
+.btn-gold:hover:not(:disabled) {
+  background: var(--gold-light);
+}
+
+/* Botón gris default */
+.btn-gray {
+  background: var(--win98-gray);
+  color: #1a1a1a;
+}
+
+.btn-gray:hover:not(:disabled) {
+  background: #d0d0d0;
+}
+
+/* Tamaños */
+.btn-sm {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+}
+
+.btn-lg {
+  font-size: 1.2rem;
+  padding: 12px 28px;
+}
+
+/* ===========================================
+   VENTANA WINDOWS 98
+   =========================================== */
+
+.window-98 {
+  background: var(--win98-gray);
+  box-shadow: 
+    inset -2px -2px 0 var(--win98-shadow),
+    inset 2px 2px 0 var(--win98-light),
+    4px 4px 0 rgba(0,0,0,0.3);
+  padding: 3px;
+}
+
+.window-titlebar {
+  background: linear-gradient(90deg, var(--suit-navy) 0%, var(--suit-navy-light) 100%);
+  color: white;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.window-content {
+  background: white;
+  padding: 16px;
+}
+
+/* Variante con borde de corbata */
+.window-98-tie .window-titlebar {
+  background: linear-gradient(90deg, var(--tie-red) 0%, var(--tie-red-light) 100%);
+}
+
+/* ===========================================
+   PANEL/CARD SIMPLE
+   =========================================== */
+
+.panel-paper {
+  background: var(--paper);
+  border: 3px solid var(--suit-navy);
+  padding: 16px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.panel-burnt {
+  background: var(--paper);
+  border: 3px solid var(--tie-red);
+  padding: 16px;
+  box-shadow: 
+    4px 4px 0 rgba(0,0,0,0.2),
+    inset 0 0 20px rgba(139, 41, 66, 0.1);
+}
+
+/* ===========================================
+   SIGNO $ DORADO
+   =========================================== */
+
+.dollar-sign {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  color: var(--gold);
+  text-shadow: 
+    1px 1px 0 var(--gold-dark),
+    2px 2px 0 var(--gold-dark),
+    3px 3px 2px rgba(0,0,0,0.3);
+}
+
+.dollar-sm { font-size: 1.5rem; }
+.dollar-md { font-size: 2.5rem; }
+.dollar-lg { font-size: 4rem; }
+
+/* ===========================================
+   TABLA ESTILO LEADERBOARD
+   =========================================== */
+
+.table-leaderboard {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Comic Neue', cursive;
+}
+
+.table-leaderboard th {
+  background: var(--suit-navy);
+  color: white;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.table-leaderboard td {
+  padding: 10px 12px;
+  border-bottom: 2px solid var(--paper-dark);
+  background: white;
+}
+
+.table-leaderboard tr:hover td {
+  background: var(--paper);
+}
+
+/* Ranks */
+.rank-1 { 
+  color: var(--gold); 
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.rank-2 { 
+  color: #808080; 
+  font-weight: 700; 
+}
+.rank-3 { 
+  color: #a0522d; 
+  font-weight: 700; 
+}
+
+/* ===========================================
+   BADGES DE NIVEL
+   =========================================== */
+
+.badge {
+  display: inline-block;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 0;
+  box-shadow: 
+    inset -1px -1px 0 rgba(0,0,0,0.3),
+    inset 1px 1px 0 rgba(255,255,255,0.5);
+}
+
+.badge-chispa {
+  background: var(--fire-yellow);
+  color: #1a1a1a;
+}
+
+.badge-llamarada {
+  background: var(--fire-orange);
+  color: white;
+}
+
+.badge-infierno {
+  background: var(--fire-red);
+  color: white;
+}
+
+/* ===========================================
+   INPUTS WINDOWS 98
+   =========================================== */
+
+.input-98 {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1rem;
+  padding: 8px 12px;
+  background: white;
+  border: none;
+  box-shadow: 
+    inset 2px 2px 0 var(--win98-shadow),
+    inset -2px -2px 0 var(--win98-light);
+}
+
+.input-98:focus {
+  outline: 2px solid var(--suit-navy);
+}
+
+/* ===========================================
+   MASCOTA DOGGY
+   =========================================== */
+
+.doggy-mascot {
+  display: block;
+  max-width: 200px;
+  image-rendering: auto;
+}
+
+.doggy-mascot-sm { max-width: 80px; }
+.doggy-mascot-md { max-width: 150px; }
+.doggy-mascot-lg { max-width: 250px; }
+
+/* ===========================================
+   HEADER
+   =========================================== */
+
+.header-bimsness {
+  background: var(--suit-navy);
+  color: white;
+  padding: 8px 0;
+  box-shadow: 0 4px 0 var(--suit-navy-dark);
+}
+
+/* ===========================================
+   EFECTOS ESPECIALES
+   =========================================== */
+
+/* Fuego animado (emoji) */
+.fire-emoji {
+  display: inline-block;
+  animation: fire-dance 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes fire-dance {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-2px) scale(1.05); }
+}
+
+/* Shake para números importantes */
+.shake-money {
+  animation: money-shake 0.3s ease-in-out;
+}
+
+@keyframes money-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px) rotate(-1deg); }
+  75% { transform: translateX(2px) rotate(1deg); }
+}
+
+/* Parpadeo para alertas */
+.blink-warning {
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ===========================================
+   LOADING SKELETON
+   =========================================== */
+
+.skeleton {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===========================================
+   UTILIDADES
+   =========================================== */
+
+.text-navy { color: var(--suit-navy); }
+.text-tie { color: var(--tie-red); }
+.text-gold { color: var(--gold); }
+.text-fire { color: var(--fire-orange); }
+.text-green { color: var(--dollar-green); }
+
+.bg-navy { background: var(--suit-navy); }
+.bg-tie { background: var(--tie-red); }
+.bg-paper { background: var(--paper); }
+.bg-gold { background: var(--gold); }
+
+/* Address/código */
+.code-address {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  background: #f5f5f5;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+@media (max-width: 640px) {
+  .title-meme { font-size: 1.75rem; }
+  .number-stonks { font-size: 1.75rem; }
+  .btn-win98 { padding: 6px 14px; font-size: 0.9rem; }
+  .dollar-lg { font-size: 2.5rem; }
 }

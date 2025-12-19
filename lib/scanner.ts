@@ -11,38 +11,71 @@ import { ParsedTransactionWithMeta } from '@solana/web3.js';
  */
 export async function scanBurns(limit: number = 100): Promise<BurnTransaction[]> {
   try {
-    // Usamos Helius Enhanced API para obtener transfers del token DOGGY
     const heliusApiKey = process.env.NEXT_PUBLIC_HELIUS_API_KEY;
     
     if (!heliusApiKey) {
-      console.error('HELIUS_API_KEY no configurada');
+      console.error('[Scanner] HELIUS_API_KEY no configurada');
       return [];
     }
 
-    // Helius API para obtener historial de transfers de un token a una dirección específica
-    const response = await fetch(
-      `https://api.helius.xyz/v0/addresses/${BURN_ADDRESS.toString()}/transactions?api-key=${heliusApiKey}&type=TRANSFER`
-    );
-
-    if (!response.ok) {
-      console.error('Error fetching from Helius:', response.status);
-      return [];
-    }
-
-    const transactions = await response.json();
     const burns: BurnTransaction[] = [];
+    let beforeSignature: string | undefined = undefined;
+    const batchSize = 100;
+    let totalFetched = 0;
+    
+    // ESTRATEGIA FINAL: Escanear la dirección oficial de burns de DOGGY
+    // Esta es el Associated Token Account (ATA) donde llegan todos los burns
+    // Muchas menos transacciones = más rápido y evita límite de Helius
+    const maxTransactions = 1000; // Reducido porque hay pocas transacciones
+    
+    while (burns.length < limit && totalFetched < maxTransactions) {
+      // Escanear directamente la dirección de burn ATA
+      const url: string = `https://api.helius.xyz/v0/addresses/${BURN_ADDRESS.toString()}/transactions?api-key=${heliusApiKey}&limit=${batchSize}${beforeSignature ? `&before=${beforeSignature}` : ''}`;
 
-    for (const tx of transactions) {
-      // Buscar transfers de DOGGY en esta transacción
-      const burnData = extractBurnFromHeliusTx(tx);
-      if (burnData) {
-        burns.push(burnData);
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        console.error('[Scanner] Error fetching from Helius:', response.status);
+        break;
       }
 
-      // Limitar resultados
-      if (burns.length >= limit) break;
+      const transactions = await response.json();
+      
+      if (!transactions || transactions.length === 0) {
+        console.log(`[Scanner] No more transactions. Total scanned: ${totalFetched}, Burns found: ${burns.length}`);
+        break;
+      }
+
+      totalFetched += transactions.length;
+
+      for (const tx of transactions) {
+        const burnData = extractBurnFromHeliusTx(tx);
+        if (burnData) {
+          burns.push(burnData);
+        }
+        
+        beforeSignature = tx.signature;
+      }
+
+      // Solo mostrar logs cada 5 batches para no saturar
+      if (Math.ceil(totalFetched/batchSize) % 5 === 0) {
+        console.log(`[Scanner] Progress: ${totalFetched} DOGGY tx scanned, ${burns.length} burns found`);
+      }
+
+      // Si no hay más transacciones en el batch, terminar
+      if (transactions.length < batchSize) {
+        console.log(`[Scanner] End of history. Total: ${totalFetched} tx, ${burns.length} burns`);
+        break;
+      }
+      
+      // Si ya encontramos suficientes burns, parar
+      if (burns.length >= limit) {
+        console.log(`[Scanner] Target reached: ${burns.length} burns found`);
+        break;
+      }
     }
 
+    console.log(`[Scanner] Total: ${totalFetched} transactions scanned, ${burns.length} DOGGY burns found`);
     return burns;
   } catch (error) {
     console.error('Error en scanBurns:', error);
@@ -60,15 +93,12 @@ function extractBurnFromHeliusTx(tx: any): BurnTransaction | null {
       return null;
     }
 
-    // Buscar transfer de DOGGY al burn address
+    // Buscar transfer de DOGGY a la dirección de burn ATA
     for (const transfer of tx.tokenTransfers) {
       const isDoggy = transfer.mint === DOGGY_MINT.toString();
-      // Helius puede usar 'toUserAccount' o 'toTokenAccount'
-      const destinationWallet = transfer.toUserAccount || '';
-      const isToBurn = destinationWallet === BURN_ADDRESS.toString();
-
-      // Debug: descomentar para ver qué transacciones se están procesando
-      // console.log(`Transfer: mint=${transfer.mint?.slice(0,8)}, to=${destinationWallet?.slice(0,8)}, isDoggy=${isDoggy}, isToBurn=${isToBurn}`);
+      // La dirección de destino es el ATA (toTokenAccount)
+      const destinationATA = transfer.toTokenAccount || '';
+      const isToBurn = destinationATA === BURN_ADDRESS.toString();
 
       if (isDoggy && isToBurn) {
         // Convertir de unidades mínimas a tokens

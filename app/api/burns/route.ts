@@ -2,7 +2,7 @@
 // Sprint 1: Endpoint con caching
 
 import { NextResponse } from 'next/server';
-import { scanBurns, calculateLeaderboard, calculateGlobalStats } from '@/lib/scanner';
+import { scanBurns, scanBurnsFallback, calculateLeaderboard, calculateGlobalStats } from '@/lib/scanner';
 import { ApiResponse } from '@/lib/types';
 
 // Cache de 30 segundos
@@ -10,8 +10,10 @@ export const revalidate = 30;
 
 export async function GET() {
   try {
-    // Escanear últimas burns (limitamos a 100 para no saturar)
-    const burns = await scanBurns(100);
+    // Escanear hasta 1000 burns (esto buscará en ~10,000 transacciones si es necesario)
+    console.log('[API] Starting burn scan...');
+    const burns = await scanBurns(1000);
+    console.log(`[API] Scan complete: ${burns.length} burns found`);
     
     // Calcular leaderboard y stats
     const leaderboard = calculateLeaderboard(burns);
