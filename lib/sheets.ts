@@ -20,9 +20,24 @@ async function getSheet() {
     throw new Error('Google Sheets credentials not configured');
   }
 
+  // Decodificar desde base64 o usar directamente si no es base64
+  let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+  
+  // Si la key está en base64, decodificarla
+  if (!privateKey.includes('BEGIN PRIVATE KEY')) {
+    try {
+      privateKey = Buffer.from(privateKey, 'base64').toString('utf-8');
+    } catch (e) {
+      console.error('[Sheets] Error decoding base64 key:', e);
+    }
+  } else {
+    // Si tiene \n literales, reemplazarlos
+    privateKey = privateKey.replace(/\\n/g, '\n');
+  }
+
   const serviceAccountAuth = new JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-    key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    key: privateKey,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
