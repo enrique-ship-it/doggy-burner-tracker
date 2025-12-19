@@ -179,14 +179,6 @@ export function BurnLeaderboard() {
             })}
           </tbody>
         </table>
-
-        {leaderboard.length > 0 && (
-          <div className="p-4 border-t-2 border-gray-300 bg-white">
-            <p className="text-center text-xs text-gray-600 text-meme">
-              💡 Niveles: CHISPA (&lt;100K) • LLAMARADA (100K-1M) • INFIERNO (&gt;1M)
-            </p>
-          </div>
-        )}
       </div>
     </div>
   );
