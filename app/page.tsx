@@ -66,7 +66,7 @@ export default function Home() {
                 <strong>¿Qué es esto?</strong> El leaderboard oficial donde la comunidad DOGGY compite quemando tokens.
               </p>
               <p className="text-meme text-base mb-3">
-                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply y te conviertes en Burn Lord 🏆
+                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply, te conviertes en Burn Lord 🏆 <strong>y recibes un NFT conmemorativo gratis</strong> 🎨
               </p>
               <p className="text-meme text-sm text-gray-600">
                 Cuantos más DOGGY quemes, más alto subes en el leaderboard. Simple.
