@@ -1,4 +1,4 @@
-import { Metaplex, walletAdapterIdentity, bundlrStorage } from '@metaplex-foundation/js';
+import { Metaplex, walletAdapterIdentity, irysStorage } from '@metaplex-foundation/js';
 import { connection } from './solana';
 import { NFTMintError, ValidationError } from './errors';
 import type { WalletContextState } from '@solana/wallet-adapter-react';
@@ -49,8 +49,8 @@ export async function mintBurnerNFT(
   try {
     const metaplex = Metaplex.make(connection)
       .use(walletAdapterIdentity(wallet))
-      .use(bundlrStorage({
-        address: 'https://node1.bundlr.network',
+      .use(irysStorage({
+        address: 'https://node2.irys.xyz',
         providerUrl: connection.rpcEndpoint,
         timeout: 60000,
       }));
@@ -59,41 +59,40 @@ export async function mintBurnerNFT(
     
     // Crear metadata JSON completa
     const nftMetadata = {
-    name: metadata.name,
-    symbol: metadata.symbol,
-    description: metadata.description,
-    image: metadata.image,
-    attributes: [
-      {
-        trait_type: "Nivel",
-        value: level.charAt(0).toUpperCase() + level.slice(1),
-      },
-      {
-        trait_type: "Total Quemado",
-        value: totalBurned.toString(),
-        display_type: "number",
-      },
-      {
-        trait_type: "Fecha de Certificación",
-        value: new Date().toISOString(),
-      },
-      {
-        trait_type: "Proyecto",
-        value: "DOGGY Burner Tracker",
-      },
-    ],
-    properties: {
-      category: "image",
-      files: [
+      name: metadata.name,
+      symbol: metadata.symbol,
+      description: metadata.description,
+      image: metadata.image,
+      attributes: [
         {
-          uri: metadata.image,
-          type: "image/png",
+          trait_type: "Nivel",
+          value: level.charAt(0).toUpperCase() + level.slice(1),
+        },
+        {
+          trait_type: "Total Quemado",
+          value: totalBurned.toString(),
+          display_type: "number",
+        },
+        {
+          trait_type: "Fecha de Certificación",
+          value: new Date().toISOString(),
+        },
+        {
+          trait_type: "Proyecto",
+          value: "DOGGY Burner Tracker",
         },
       ],
-    },
-  };
+      properties: {
+        category: "image",
+        files: [
+          {
+            uri: metadata.image,
+            type: "image/png",
+          },
+        ],
+      },
+    };
 
-  try {
     console.log('[NFT] Subiendo metadata a Arweave...');
     const { uri } = await metaplex.nfts().uploadMetadata(nftMetadata);
     console.log('[NFT] Metadata URI:', uri);

@@ -20,10 +20,11 @@ export async function scanBurns(
     // Preferir connection inyectada (server) o usar la default (client)
     const conn = customConnection || connection;
     
-    const heliusApiKey = process.env.NEXT_PUBLIC_HELIUS_API_KEY || process.env.HELIUS_API_KEY;
+    // API key SOLO server-side (sin NEXT_PUBLIC_)
+    const heliusApiKey = process.env.HELIUS_API_KEY;
     
     if (!heliusApiKey) {
-      console.error('[Scanner] HELIUS_API_KEY no configurada');
+      console.error('[Scanner] HELIUS_API_KEY no configurada (debe ser server-side)');
       return [];
     }
 

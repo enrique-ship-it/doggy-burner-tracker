@@ -2,9 +2,9 @@
 
 import { Connection, PublicKey } from '@solana/web3.js';
 
-// Helius RPC
-const HELIUS_API_KEY = process.env.NEXT_PUBLIC_HELIUS_API_KEY!;
-const RPC_URL = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}`;
+// Cliente USA RPC PÚBLICO (sin API key)
+// Para evitar exponer la API key de Helius en el cliente
+const RPC_URL = 'https://api.mainnet-beta.solana.com';
 
 export const connection = new Connection(RPC_URL, 'confirmed');
 

@@ -260,7 +260,7 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
               />
             </div>
             <p className="text-center text-sm text-gray-600 mt-3 font-semibold">
-              Tu certificado nivel {burnerInfo.level.toUpperCase()}
+              Tu certificado nivel {burnerInfo.level?.toUpperCase() ?? 'QUEMADOR'}
             </p>
           </div>
 
