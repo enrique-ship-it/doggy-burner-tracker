@@ -3,6 +3,7 @@
 
 import { NextResponse } from 'next/server';
 import { scanBurns, scanBurnsFallback, calculateLeaderboard, calculateGlobalStats } from '@/lib/scanner';
+import { getServerConnection } from '@/lib/server-connection';
 import { ApiResponse } from '@/lib/types';
 
 // Cache de 30 segundos
@@ -10,9 +11,12 @@ export const revalidate = 30;
 
 export async function GET() {
   try {
+    // Usar server connection con API key protegida
+    const serverConn = getServerConnection();
+    
     // Escanear hasta 1000 burns (esto buscará en ~10,000 transacciones si es necesario)
     console.log('[API] Starting burn scan...');
-    const burns = await scanBurns(1000);
+    const burns = await scanBurns(1000, serverConn);
     console.log(`[API] Scan complete: ${burns.length} burns found`);
     
     // Calcular leaderboard y stats

@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Connection, PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddress } from '@solana/spl-token';
-import { DOGGY_MINT, BURN_ADDRESS, formatMillions } from '../lib/solana';
+import { connection, DOGGY_MINT, BURN_ADDRESS, formatMillions } from '../lib/solana';
 import { POLL_INTERVAL } from '../lib/constants';
 
 interface GlobalStats {
@@ -38,15 +37,10 @@ export function BurnStats() {
     return () => clearInterval(interval);
   }, []);
 
-  // Fetch PDA balance on-chain
+  // Fetch PDA balance on-chain usando connection centralizada
   useEffect(() => {
     async function fetchPdaBalance() {
       try {
-        const connection = new Connection(
-          `https://mainnet.helius-rpc.com/?api-key=${process.env.NEXT_PUBLIC_HELIUS_API_KEY}`,
-          'confirmed'
-        );
-        
         const tokenAccount = await getAssociatedTokenAddress(
           DOGGY_MINT,
           BURN_ADDRESS

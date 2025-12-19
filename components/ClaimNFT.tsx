@@ -105,19 +105,42 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
     }
 
     setMinting(true);
-    setMessage('Preparando tu NFT certificado...');
+    setMessage('Verificando burns en blockchain...');
     setMessageType('info');
 
     try {
+      // CRÍTICO: Validar server-side antes de mintear
+      // Esto previene que usuarios manipulen burnerInfo en el cliente
+      const verifyResponse = await fetch('/api/verify-burns', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          walletAddress: wallet.publicKey.toBase58() 
+        })
+      });
+
+      const verifyData = await verifyResponse.json();
+
+      if (!verifyData.eligible) {
+        setMessage(verifyData.error || 'No calificas para mintear NFT');
+        setMessageType('error');
+        setMinting(false);
+        return;
+      }
+
+      // Usuario verificado - proceder con mint usando datos del servidor
+      setMessage('Preparando tu NFT certificado...');
+      
       // Importar dinámicamente para evitar errores de SSR
       const { mintBurnerNFT } = await import('@/lib/nft');
       
       setMessage('Subiendo metadata a Arweave...');
       
+      // Usar stats verificadas del servidor, no del cliente
       const result = await mintBurnerNFT(
         wallet,
-        burnerInfo.level,
-        burnerInfo.totalBurned
+        verifyData.burnerStats.level,
+        verifyData.burnerStats.totalBurned
       );
 
       setMessage(`🎉 ¡NFT Minteado! ${result.address.slice(0, 4)}...${result.address.slice(-4)}`);
@@ -225,25 +248,43 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
           </p>
         </div>
 
-        {/* NFT PREVIEW */}
-        <div className={`bg-gradient-to-br ${nftInfo.color} p-8 rounded-lg border-4 ${nftInfo.borderColor} mb-6 relative overflow-hidden`}>
-          {/* Decorative corner */}
-          <div className="absolute top-0 right-0 w-20 h-20 bg-white/20 rounded-bl-full"></div>
-          
-          <div className="text-center relative z-10">
-            <div className="text-7xl mb-4 animate-pulse">{nftInfo.emoji}</div>
-            <h4 className="text-2xl font-bold mb-2 text-gray-800">{nftInfo.name}</h4>
-            <p className="text-sm text-gray-700 mb-4">{nftInfo.description}</p>
+        {/* NFT PREVIEW - Grid 2 columnas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Imagen del NFT */}
+          <div className="flex flex-col items-center">
+            <div className="relative w-full max-w-xs">
+              <img 
+                src={`/nfts/${burnerInfo.level}.png`}
+                alt={`NFT ${burnerInfo.level}`}
+                className={`w-full h-auto rounded-lg border-4 ${nftInfo.borderColor} shadow-lg`}
+              />
+            </div>
+            <p className="text-center text-sm text-gray-600 mt-3 font-semibold">
+              Tu certificado nivel {burnerInfo.level.toUpperCase()}
+            </p>
+          </div>
+
+          {/* Info y Stats */}
+          <div className={`bg-gradient-to-br ${nftInfo.color} p-6 rounded-lg border-4 ${nftInfo.borderColor} relative overflow-hidden flex flex-col justify-center`}>
+            <div className="absolute top-0 right-0 w-20 h-20 bg-white/20 rounded-bl-full"></div>
             
-            <div className="mt-6 pt-4 border-t-2 border-black/10">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="bg-white/50 rounded p-2">
-                  <p className="text-xs text-gray-600 mb-1">Total Quemado</p>
-                  <p className="font-bold text-gray-800">{formatNumber(burnerInfo.totalBurned)} DOGGY</p>
-                </div>
-                <div className="bg-white/50 rounded p-2">
-                  <p className="text-xs text-gray-600 mb-1">Ranking</p>
-                  <p className="font-bold text-gray-800">#{burnerInfo.rank}</p>
+            <div className="relative z-10">
+              <div className="text-center mb-4">
+                <div className="text-6xl mb-3 animate-pulse">{nftInfo.emoji}</div>
+                <h4 className="text-2xl font-bold mb-2 text-gray-800">{nftInfo.name}</h4>
+                <p className="text-sm text-gray-700">{nftInfo.description}</p>
+              </div>
+              
+              <div className="mt-4 pt-4 border-t-2 border-black/10">
+                <div className="grid grid-cols-2 gap-3 text-sm">
+                  <div className="bg-white/50 rounded p-3">
+                    <p className="text-xs text-gray-600 mb-1">Total Quemado</p>
+                    <p className="font-bold text-gray-800 text-base">{formatNumber(burnerInfo.totalBurned)} DOGGY</p>
+                  </div>
+                  <div className="bg-white/50 rounded p-3">
+                    <p className="text-xs text-gray-600 mb-1">Ranking</p>
+                    <p className="font-bold text-gray-800 text-base">#{burnerInfo.rank}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -255,9 +296,9 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
           <button
             onClick={handleMintNFT}
             disabled={minting}
-            className="btn-win98 btn-fire w-full py-3 text-lg font-bold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-win98 btn-fire btn-xl w-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {minting ? 'Minteando... ⏳' : '🔥 Mintear NFT Gratis'}
+            {minting ? '⏳ Minteando tu certificado...' : '🎨 Mintear NFT Certificado'}
           </button>
 
           {/* PRICING INFO */}

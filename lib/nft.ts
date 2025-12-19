@@ -1,5 +1,6 @@
 import { Metaplex, walletAdapterIdentity, bundlrStorage } from '@metaplex-foundation/js';
 import { connection } from './solana';
+import { NFTMintError, ValidationError } from './errors';
 import type { WalletContextState } from '@solana/wallet-adapter-react';
 
 const NFT_METADATA = {
@@ -32,22 +33,32 @@ export async function mintBurnerNFT(
   level: 'bronce' | 'plata' | 'oro',
   totalBurned: number
 ) {
-  if (!wallet.publicKey || !wallet.signTransaction) {
-    throw new Error('Wallet no conectada correctamente');
+  // Validar inputs
+  if (!wallet?.publicKey || !wallet?.signTransaction) {
+    throw new ValidationError('Wallet no conectada correctamente');
   }
 
-  const metaplex = Metaplex.make(connection)
-    .use(walletAdapterIdentity(wallet))
-    .use(bundlrStorage({
-      address: 'https://devnet.bundlr.network',
-      providerUrl: 'https://api.devnet.solana.com',
-      timeout: 60000,
-    }));
+  if (!level || !['bronce', 'plata', 'oro'].includes(level)) {
+    throw new ValidationError(`Nivel inválido: ${level}`);
+  }
 
-  const metadata = NFT_METADATA[level];
-  
-  // Crear metadata JSON completa
-  const nftMetadata = {
+  if (typeof totalBurned !== 'number' || totalBurned < 0) {
+    throw new ValidationError(`Total burned inválido: ${totalBurned}`);
+  }
+
+  try {
+    const metaplex = Metaplex.make(connection)
+      .use(walletAdapterIdentity(wallet))
+      .use(bundlrStorage({
+        address: 'https://node1.bundlr.network',
+        providerUrl: connection.rpcEndpoint,
+        timeout: 60000,
+      }));
+
+    const metadata = NFT_METADATA[level];
+    
+    // Crear metadata JSON completa
+    const nftMetadata = {
     name: metadata.name,
     symbol: metadata.symbol,
     description: metadata.description,
@@ -82,24 +93,31 @@ export async function mintBurnerNFT(
     },
   };
 
-  console.log('[NFT] Subiendo metadata a Arweave...');
-  const { uri } = await metaplex.nfts().uploadMetadata(nftMetadata);
-  console.log('[NFT] Metadata URI:', uri);
+  try {
+    console.log('[NFT] Subiendo metadata a Arweave...');
+    const { uri } = await metaplex.nfts().uploadMetadata(nftMetadata);
+    console.log('[NFT] Metadata URI:', uri);
 
-  console.log('[NFT] Minteando NFT...');
-  const { nft } = await metaplex.nfts().create({
-    uri,
-    name: metadata.name,
-    symbol: metadata.symbol,
-    sellerFeeBasisPoints: 0, // Sin royalties
-    isMutable: false, // NFT inmutable
-  });
+    console.log('[NFT] Minteando NFT...');
+    const { nft } = await metaplex.nfts().create({
+      uri,
+      name: metadata.name,
+      symbol: metadata.symbol,
+      sellerFeeBasisPoints: 0, // Sin royalties
+      isMutable: false, // NFT inmutable
+    });
 
-  console.log('[NFT] NFT minteado exitosamente:', nft.address.toString());
-  
-  return {
-    address: nft.address.toString(),
-    name: nft.name,
-    uri: nft.uri,
-  };
+    console.log('[NFT] NFT minteado exitosamente:', nft.address.toString());
+    
+    return {
+      address: nft.address.toString(),
+      name: nft.name,
+      uri: nft.uri,
+    };
+  } catch (error: any) {
+    console.error('[NFT] Error minteando NFT:', error);
+    throw new NFTMintError(
+      error.message || 'Error al mintear NFT. Verifica que tienes suficiente SOL para gas.'
+    );
+  }
 }

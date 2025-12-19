@@ -15,39 +15,31 @@ export function DonateButton() {
 
   return (
     <div className="max-w-md mx-auto">
-      {/* Post-it style */}
-      <div 
-        className="bg-yellow-100 border-t-4 border-yellow-400 rounded-sm p-5 shadow-lg relative"
-        style={{
-          background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-          transform: 'rotate(-0.5deg)'
-        }}
-      >
-        {/* Shadow effect for depth */}
-        <div className="absolute -bottom-1 -right-1 w-full h-full bg-yellow-200/30 rounded-sm -z-10" 
-             style={{ transform: 'rotate(1deg)' }} 
-        />
-        
-        <div className="relative">
-          <h3 className="text-base font-bold text-yellow-900 mb-2 font-handwriting">
-            💎 Apoyar al Dev
-          </h3>
-          <p className="text-sm text-yellow-800 mb-3">
-            Donaciones en DOGGY
+      <div className="window-98">
+        <div className="window-titlebar">
+          <span>💎 apoyar-dev.exe</span>
+          <span>—  ▢  ✕</span>
+        </div>
+        <div className="window-content text-center">
+          <p className="text-meme-bold text-base mb-2">
+            Apoyar al Dev
           </p>
-          <div className="bg-yellow-50 border border-yellow-300 rounded px-2 py-2 mb-3">
-            <code className="text-xs text-yellow-900 break-all block font-mono">
-              {DEV_WALLET.toBase58().slice(0, 16)}...{DEV_WALLET.toBase58().slice(-6)}
+          <p className="text-meme text-sm mb-4 text-gray-700">
+            Donaciones en DOGGY <span className="text-xs text-gray-500">(100% opcional)</span>
+          </p>
+          <div className="bg-gray-100 border-2 border-gray-300 rounded px-3 py-2 mb-4">
+            <code className="code-address block text-xs">
+              {DEV_WALLET.toBase58().slice(0, 12)}...{DEV_WALLET.toBase58().slice(-8)}
             </code>
           </div>
           <button
             onClick={handleCopy}
-            className="w-full bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold px-4 py-2 rounded shadow-sm transition-all hover:shadow-md active:shadow-none"
+            className="btn-win98 btn-gold w-full"
           >
-            {copied ? '✓ Copiado!' : '📋 Copiar Wallet'}
+            {copied ? '✓ Copiado al portapapeles!' : '📋 Copiar Wallet'}
           </button>
-          <p className="text-xs text-yellow-700 mt-3 text-center italic">
-            100% opcional
+          <p className="text-xs text-gray-600 mt-4">
+            💡 Cada donación ayuda a mantener el tracker funcionando
           </p>
         </div>
       </div>

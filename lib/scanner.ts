@@ -5,13 +5,22 @@ import { connection, DOGGY_MINT, BURN_ADDRESS, DOGGY_DECIMALS, getLevel } from '
 import { BurnTransaction, BurnerStats, GlobalStats } from './types';
 import { ParsedTransactionWithMeta } from '@solana/web3.js';
 
+// CRÍTICO: Usar getServerConnection() cuando scanner se ejecuta server-side
+// Para API routes usar: const { getServerConnection } = await import('@/lib/server-connection');
+
 /**
  * Escanea la blockchain buscando burns de DOGGY
  * Un "burn" es una transferencia de DOGGY al BURN_ADDRESS
  */
-export async function scanBurns(limit: number = 100): Promise<BurnTransaction[]> {
+export async function scanBurns(
+  limit: number = 100,
+  customConnection?: any // Permitir connection opcional para API routes
+): Promise<BurnTransaction[]> {
   try {
-    const heliusApiKey = process.env.NEXT_PUBLIC_HELIUS_API_KEY;
+    // Preferir connection inyectada (server) o usar la default (client)
+    const conn = customConnection || connection;
+    
+    const heliusApiKey = process.env.NEXT_PUBLIC_HELIUS_API_KEY || process.env.HELIUS_API_KEY;
     
     if (!heliusApiKey) {
       console.error('[Scanner] HELIUS_API_KEY no configurada');

@@ -100,7 +100,15 @@ body {
 .subtitle-meme {
   font-family: 'Comic Neue', cursive;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.75rem;
+  color: var(--suit-navy);
+}
+
+/* Subtitle mejorado - más contraste y tamaño intermedio */
+.subtitle-meme-enhanced {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1.375rem;
   color: var(--suit-navy);
 }
 
@@ -160,6 +168,23 @@ body {
 .btn-win98:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+/* Tamaños de botón - Jerarquía visual */
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 10px 24px;
+  font-size: 1.125rem;
+}
+
+.btn-xl {
+  padding: 14px 32px;
+  font-size: 1.25rem;
+  font-weight: 700;
 }
 
 /* Botón Navy (traje) - Primario */
@@ -313,6 +338,22 @@ body {
   background: var(--paper);
 }
 
+/* Highlights para top 3 */
+.table-leaderboard tbody tr:nth-child(1) td {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 237, 78, 0.1));
+  font-weight: 600;
+}
+
+.table-leaderboard tbody tr:nth-child(2) td {
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.12), rgba(232, 232, 232, 0.08));
+  font-weight: 600;
+}
+
+.table-leaderboard tbody tr:nth-child(3) td {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.12), rgba(232, 149, 69, 0.08));
+  font-weight: 600;
+}
+
 /* Ranks */
 .rank-1 { 
   color: var(--gold); 
@@ -391,6 +432,18 @@ body {
 .doggy-mascot-sm { max-width: 80px; }
 .doggy-mascot-md { max-width: 150px; }
 .doggy-mascot-lg { max-width: 250px; }
+.doggy-mascot-xl { max-width: 300px; }
+
+/* Responsive mascota */
+@media (max-width: 640px) {
+  .doggy-mascot-lg { max-width: 150px; }
+  .doggy-mascot-xl { max-width: 200px; }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .doggy-mascot-lg { max-width: 200px; }
+  .doggy-mascot-xl { max-width: 240px; }
+}
 
 /* ===========================================
    HEADER

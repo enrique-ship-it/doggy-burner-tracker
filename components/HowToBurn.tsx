@@ -78,62 +78,62 @@ export function HowToBurn() {
         <div className="mb-6">
           <h4 className="text-meme-bold text-lg mb-4">📱 Pasos para Quemar</h4>
           
-          <div className="space-y-3">
-            <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-fire text-white flex items-center justify-center font-bold">
+          <div className="space-y-4">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
                 1
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold mb-1">Abre tu Wallet</h5>
-                <p className="text-sm text-gray-600">
+                <h5 className="text-meme-bold text-base mb-1">Abre tu Wallet</h5>
+                <p className="text-sm text-gray-700">
                   Phantom, Solflare, Backpack, o cualquier wallet de Solana
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-fire text-white flex items-center justify-center font-bold">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
                 2
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold mb-1">Selecciona DOGGY Token</h5>
-                <p className="text-sm text-gray-600">
+                <h5 className="text-meme-bold text-base mb-1">Selecciona DOGGY Token</h5>
+                <p className="text-sm text-gray-700">
                   Encuentra DOGGY en tu lista de tokens
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-fire text-white flex items-center justify-center font-bold">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
                 3
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold mb-1">Click en "Enviar"</h5>
-                <p className="text-sm text-gray-600">
+                <h5 className="text-meme-bold text-base mb-1">Haz clic en Enviar/Send</h5>
+                <p className="text-sm text-gray-700">
                   Pega la dirección que copiaste arriba
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-fire text-white flex items-center justify-center font-bold">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
                 4
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold mb-1">Ingresa Cantidad</h5>
-                <p className="text-sm text-gray-600">
+                <h5 className="text-meme-bold text-base mb-1">Pega la dirección</h5>
+                <p className="text-sm text-gray-700">
                   Mínimo 10,000 DOGGY para aparecer en el leaderboard
                 </p>
               </div>
             </div>
 
-            <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-fire text-white flex items-center justify-center font-bold">
+            <div className="flex gap-4">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
                 5
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold mb-1">Confirma Transacción</h5>
-                <p className="text-sm text-gray-600">
+                <h5 className="text-meme-bold text-base mb-1">Confirma y Espera</h5>
+                <p className="text-sm text-gray-700">
                   Revisa bien todo antes de confirmar
                 </p>
               </div>
