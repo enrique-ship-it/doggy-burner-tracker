@@ -400,39 +400,47 @@ body {
     inset 1px 1px 0 rgba(255,255,255,0.5);
 }
 
-.badge-chispa {
-  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-  color: white;
-  border: 2px solid #ff6b35;
-}
-
-.badge-llamarada {
-  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
-  color: white;
-  border: 2px solid #dc2626;
-}
-
-.badge-infierno {
-  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
-  color: #fbbf24;
-  border: 2px solid #fbbf24;
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
-}
-
-/* Legacy badges */
+/* Badges de niveles */
 .badge-bronce {
   background: linear-gradient(135deg, #cd7f32 0%, #e89545 100%);
   color: white;
+  border: 2px solid #cd7f32;
 }
 
 .badge-plata {
   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #1a1a1a;
+  border: 2px solid #a0a0a0;
 }
 
 .badge-oro {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   color: #1a1a1a;
+  border: 2px solid #c9a227;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Badge display grande (para claim success) */
+.badge-display {
+  display: inline-block;
+  padding: 20px 40px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge pequeño (para leaderboard) */
+.badge-small {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* ===========================================

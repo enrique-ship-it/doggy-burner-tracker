@@ -30,7 +30,7 @@ export function HowToBurn() {
             🔥 Cómo Aparecer en el Dashboard
           </h3>
           <p className="text-meme text-sm text-gray-600 mb-3">
-            Todo manual desde TU wallet. Sin conectar, sin firmar, sin riesgos.
+            Todo manual desde TU wallet. Para quemar, no conectas nada. Para reclamar badge (opcional), solo firmas un mensaje gratis.
           </p>
           
           {/* SEGURIDAD PROMINENTE */}
@@ -40,8 +40,8 @@ export function HowToBurn() {
             </p>
             <ul className="text-xs text-green-700 text-left space-y-1">
               <li>✅ <strong>Desde tu wallet</strong> - Tú controlas todo</li>
-              <li>✅ <strong>Sin conectar</strong> - Nunca te pedimos acceso</li>
-              <li>✅ <strong>Sin firmar nada</strong> - Solo transfer normal</li>
+              <li>✅ <strong>Para quemar</strong> - No conectas wallet, solo envías</li>
+              <li>✅ <strong>Para badge (opcional)</strong> - Solo firma mensaje, gratis</li>
               <li>✅ <strong>Verificable on-chain</strong> - Datos públicos</li>
             </ul>
           </div>
@@ -109,9 +109,9 @@ export function HowToBurn() {
                 <span className="text-2xl font-bold text-fire">2.</span>
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold text-base mb-1">Selecciona DOGGY Token</h5>
+                <h5 className="text-meme-bold text-base mb-1">Selecciona DOGGY y haz clic en Enviar</h5>
                 <p className="text-sm text-gray-700">
-                  Encuentra DOGGY en tu lista de tokens
+                  Encuentra DOGGY en tu lista de tokens y selecciona "Send"
                 </p>
               </div>
             </div>
@@ -121,9 +121,9 @@ export function HowToBurn() {
                 <span className="text-2xl font-bold text-fire">3.</span>
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold text-base mb-1">Haz clic en Enviar/Send</h5>
+                <h5 className="text-meme-bold text-base mb-1">Pega la dirección de quemado</h5>
                 <p className="text-sm text-gray-700">
-                  Pega la dirección que copiaste arriba
+                  Copia la dirección de arriba y pégala en el campo "To"
                 </p>
               </div>
             </div>
@@ -133,7 +133,7 @@ export function HowToBurn() {
                 <span className="text-2xl font-bold text-fire">4.</span>
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold text-base mb-1">Pega la dirección</h5>
+                <h5 className="text-meme-bold text-base mb-1">Ingresa la cantidad</h5>
                 <p className="text-sm text-gray-700">
                   Mínimo 10,000 DOGGY para aparecer en el leaderboard
                 </p>
@@ -145,9 +145,21 @@ export function HowToBurn() {
                 <span className="text-2xl font-bold text-fire">5.</span>
               </div>
               <div className="flex-1">
-                <h5 className="text-meme-bold text-base mb-1">Confirma y Espera</h5>
+                <h5 className="text-meme-bold text-base mb-1">Confirma la transacción</h5>
                 <p className="text-sm text-gray-700">
-                  Revisa bien todo antes de confirmar
+                  Revisa todo y confirma en tu wallet
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">6.</span>
+              </div>
+              <div className="flex-1">
+                <h5 className="text-meme-bold text-base mb-1">Reclama tu Badge 🎖️</h5>
+                <p className="text-sm text-gray-700">
+                  Firma un mensaje en tu wallet para recibir tu badge. <strong>Gratis, sin fees</strong>
                 </p>
               </div>
             </div>
@@ -159,7 +171,7 @@ export function HowToBurn() {
               <div className="flex-1">
                 <h5 className="text-meme-bold mb-1">¡Listo! 🎉</h5>
                 <p className="text-sm text-gray-600">
-                  En 30-60 segundos aparecerás en el dashboard
+                  Aparecerás en el leaderboard en 30-60 segundos
                 </p>
               </div>
             </div>

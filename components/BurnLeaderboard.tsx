@@ -6,7 +6,7 @@ interface BurnerStats {
   address: string;
   totalBurned: number;
   burnCount: number;
-  level: 'chispa' | 'llamarada' | 'infierno';
+  level: 'bronce' | 'plata' | 'oro';
   firstBurn: number;
   lastBurn: number;
 }
@@ -37,10 +37,10 @@ export function BurnLeaderboard() {
 
   const getBadgeClass = (level: string) => {
     switch (level.toLowerCase()) {
-      case 'infierno': return 'badge badge-infierno';
-      case 'llamarada': return 'badge badge-llamarada';
-      case 'chispa': return 'badge badge-chispa';
-      default: return 'badge badge-chispa';
+      case 'oro': return 'badge badge-oro';
+      case 'plata': return 'badge badge-plata';
+      case 'bronce': return 'badge badge-bronce';
+      default: return 'badge badge-bronce';
     }
   };
 
@@ -142,22 +142,25 @@ export function BurnLeaderboard() {
                   </td>
                   <td>
                   <div className="flex items-center gap-3">
-                    {/* Badge visual primero */}
-                    <span className="text-2xl">
-                      {entry.level === 'infierno' && '💀🔥'}
-                      {entry.level === 'llamarada' && '🔥🔥'}
-                      {entry.level === 'chispa' && '🔥'}
-                    </span>
-                    {/* Wallet + nivel en texto */}
+                    {/* Mostrar imagen NFT solo si reclamó badge, sino insignia de texto */}
+                    {entry.hasBadge ? (
+                      <img 
+                        src={`/nfts/${entry.level}.png`}
+                        alt={entry.level}
+                        className="w-10 h-10 rounded-md shadow-sm"
+                      />
+                    ) : (
+                      <span className={`badge-small badge-${entry.level}`}>
+                        {entry.level === 'oro' ? 'ORO' : entry.level === 'plata' ? 'PLATA' : 'BRONCE'}
+                      </span>
+                    )}
+                    {/* Wallet */}
                     <div>
                       <span className="font-mono text-sm font-medium">
                         {shortenAddress(entry.address)}
                       </span>
-                      <span className="text-xs text-gray-500 ml-2">
-                        {entry.level.toUpperCase()}
-                      </span>
                       <span className="text-xs text-gray-400 ml-2">
-                        • {entry.burnCount}x
+                        • {entry.burnCount}x burns
                       </span>
                     </div>
                   </div>

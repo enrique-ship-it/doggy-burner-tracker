@@ -15,6 +15,7 @@ export interface BurnerStats {
   level: 'bronce' | 'plata' | 'oro';
   firstBurn: number;
   lastBurn: number;
+  hasBadge?: boolean; // Si ya reclamó el badge
 }
 
 export interface GlobalStats {

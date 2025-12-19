@@ -7,6 +7,7 @@ import { WalletLookup } from '@/components/WalletLookup';
 import { RecentBurns } from '@/components/RecentBurns';
 import { HowToBurn } from '@/components/HowToBurn';
 import { DonateButton } from '@/components/DonateButton';
+import { ClaimBadge } from '@/components/ClaimBadge';
 
 export default function Home() {
   return (
@@ -38,13 +39,13 @@ export default function Home() {
                 <strong>¿Qué es esto?</strong> El leaderboard oficial donde la comunidad DOGGY compite quemando tokens.
               </p>
               <p className="text-meme text-base mb-3">
-                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply, te conviertes en DoggyQuemador 🏆 <strong>y recibes un NFT conmemorativo gratis</strong> 🎨
+                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply, te conviertes en DoggyQuemador 🏆 <strong>y recibes tu badge conmemorativo "The Doggy Burner"</strong> 🔥
               </p>
               
               {/* SEGURIDAD DESTACADA */}
               <div className="bg-green-50 border-2 border-green-500 p-4 rounded mt-4 mb-3">
                 <p className="text-sm font-bold text-green-800 mb-2">
-                  🔒 <strong>100% SEGURO - SIN CONECTAR WALLET</strong>
+                  🔒 <strong>100% SEGURO - SOLO VES LOS BURNS</strong>
                 </p>
                 <p className="text-xs text-green-700">
                   Nunca te pedimos conectar tu wallet. Todo es manual y verificable on-chain. 
@@ -81,6 +82,11 @@ export default function Home() {
           {/* WALLET LOOKUP - Buscar posición y reclamar NFT */}
           <div className="spacing-lg">
             <WalletLookup />
+          </div>
+
+          {/* CLAIM BADGE - Sistema de badges con Google Sheets */}
+          <div className="spacing-lg">
+            <ClaimBadge />
           </div>
 
           {/* RECENT BURNS - Actividad */}

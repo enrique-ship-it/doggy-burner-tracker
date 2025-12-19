@@ -127,7 +127,7 @@ export function WalletLookup() {
   return (
     <div className="window-98 max-w-2xl mx-auto">
       <div className="window-titlebar">
-        <span>🔍 buscar.exe - Ver stats sin conectar</span>
+        <span>🔍 buscar.exe - Ver stats públicas</span>
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content">
@@ -226,17 +226,17 @@ export function WalletLookup() {
                     </p>
                     <ul className="text-xs text-green-700 space-y-1">
                       <li>✅ <strong>NO conectamos tu wallet</strong> - Solo verificamos on-chain</li>
-                      <li>✅ <strong>NO te pedimos firma</strong> - Todo manual</li>
-                      <li>✅ <strong>NFT llega directo</strong> - Sin pop-ups sospechosos</li>
+                      <li>✅ <strong>Para quemar NO necesitas conectar</strong> - Solo envías desde tu wallet</li>
+                      <li>✅ <strong>Badge gratis</strong> - Solo firma mensaje (sin costo)</li>
                     </ul>
                   </div>
                   
                   <h4 className="text-meme-bold text-lg mb-3 text-center">
-                    🎨 Reclamar NFT Conmemorativo
+                    �️ Reclamar Badge Conmemorativo
                   </h4>
                   
                   <p className="text-sm text-center mb-4">
-                    Calificas para un NFT de nivel <strong className={getLevelBadgeClass(stats.level)}>{stats.level.toUpperCase()}</strong>
+                    Calificas para un badge de nivel <strong className={getLevelBadgeClass(stats.level)}>{stats.level.toUpperCase()}</strong>
                   </p>
                   
                   {claimStatus === 'idle' && (
@@ -253,7 +253,7 @@ export function WalletLookup() {
                           className="w-full px-4 py-2 border-2 border-gray-400 focus:outline-none focus:border-blue-500"
                         />
                         <p className="text-xs text-gray-500 mt-1">
-                          Opcional. Solo para avisarte cuando llegue tu NFT.
+                          Opcional. Solo para notificaciones futuras.
                         </p>
                       </div>
                       
@@ -261,11 +261,11 @@ export function WalletLookup() {
                         type="submit"
                         className="btn-win98 btn-tie w-full text-lg py-3"
                       >
-                        🎨 Solicitar Mi NFT
+                        �️ Solicitar Mi Badge
                       </button>
                       
                       <p className="text-xs text-center text-gray-600 mt-3 text-meme">
-                        Tu NFT será enviado en 24-48 horas después de verificar tus burns on-chain
+                        Tu badge será procesado en 24-48 horas después de verificar tus burns on-chain
                       </p>
                     </form>
                   )}

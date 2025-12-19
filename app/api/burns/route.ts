@@ -4,6 +4,7 @@
 import { NextResponse } from 'next/server';
 import { scanBurns, scanBurnsFallback, calculateLeaderboard, calculateGlobalStats } from '@/lib/scanner';
 import { getServerConnection } from '@/lib/server-connection';
+import { getAllBadgeHolders } from '@/lib/sheets';
 import { ApiResponse } from '@/lib/types';
 
 // Cache de 30 segundos
@@ -19,13 +20,24 @@ export async function GET() {
     const burns = await scanBurns(1000, serverConn);
     console.log(`[API] Scan complete: ${burns.length} burns found`);
     
+    // Obtener badges reclamados
+    const badgeHolders = await getAllBadgeHolders();
+    const badgeWallets = new Set(badgeHolders.map(b => b.wallet.toLowerCase()));
+    
     // Calcular leaderboard y stats
     const leaderboard = calculateLeaderboard(burns);
+    
+    // Agregar información de badge reclamado
+    const leaderboardWithBadges = leaderboard.map(entry => ({
+      ...entry,
+      hasBadge: badgeWallets.has(entry.address.toLowerCase()),
+    }));
+    
     const stats = calculateGlobalStats(burns);
 
     const response: ApiResponse = {
       burns: burns.slice(0, 20), // Últimas 20 para el frontend
-      leaderboard: leaderboard.slice(0, 20), // Top 20 burners
+      leaderboard: leaderboardWithBadges.slice(0, 20), // Top 20 burners
       stats,
     };
 
