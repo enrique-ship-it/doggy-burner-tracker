@@ -39,17 +39,17 @@ export function truncateAddress(address: string): string {
 }
 
 // Helper para obtener nivel según cantidad quemada
-export function getLevel(totalBurned: number): 'chispa' | 'llamarada' | 'infierno' {
-  if (totalBurned >= 1_000_000) return 'infierno';
-  if (totalBurned >= 100_000) return 'llamarada';
-  return 'chispa';
+export function getLevel(totalBurned: number): 'bronce' | 'plata' | 'oro' {
+  if (totalBurned >= 1_000_000) return 'oro';
+  if (totalBurned >= 100_000) return 'plata';
+  return 'bronce';
 }
 
 // Helper para obtener emoji del nivel
-export function getLevelEmoji(level: 'chispa' | 'llamarada' | 'infierno'): string {
+export function getLevelEmoji(level: 'bronce' | 'plata' | 'oro'): string {
   switch (level) {
-    case 'infierno': return '🔥🔥🔥';
-    case 'llamarada': return '🔥🔥';
-    case 'chispa': return '🔥';
+    case 'oro': return '🥇';
+    case 'plata': return '🥈';
+    case 'bronce': return '🥉';
   }
 }

@@ -10,9 +10,9 @@ export const COPY_FEEDBACK_DELAY = 2_000; // 2 segundos
 export const SUCCESS_MESSAGE_DELAY = 5_000; // 5 segundos
 
 // Burn levels (en DOGGY tokens)
-export const BURN_LEVEL_CHISPA_MIN = 10_000;
-export const BURN_LEVEL_LLAMARADA_MIN = 100_000;
-export const BURN_LEVEL_INFIERNO_MIN = 1_000_000;
+export const BURN_LEVEL_BRONCE_MIN = 10_000;
+export const BURN_LEVEL_PLATA_MIN = 100_000;
+export const BURN_LEVEL_ORO_MIN = 1_000_000;
 
 // Token decimals
 export const DOGGY_DECIMALS = 6;

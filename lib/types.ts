@@ -12,7 +12,7 @@ export interface BurnerStats {
   address: string;
   totalBurned: number;
   burnCount: number;
-  level: 'chispa' | 'llamarada' | 'infierno';
+  level: 'bronce' | 'plata' | 'oro';
   firstBurn: number;
   lastBurn: number;
 }

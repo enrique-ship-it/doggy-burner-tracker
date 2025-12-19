@@ -160,21 +160,21 @@ export function HowToBurn() {
           <div className="space-y-2">
             <div className="flex items-center justify-between p-2 bg-white rounded border border-orange-200">
               <div className="flex items-center gap-2">
-                <span className="badge badge-chispa">🔥 CHISPA</span>
+                <span className="badge badge-bronce">🥉 BRONCE</span>
                 <span className="text-sm text-gray-700">10,000 - 99,999 DOGGY</span>
               </div>
             </div>
             
-            <div className="flex items-center justify-between p-2 bg-white rounded border border-orange-300">
+            <div className="flex items-center justify-between p-2 bg-white rounded border border-gray-300">
               <div className="flex items-center gap-2">
-                <span className="badge badge-llamarada">🔥🔥 LLAMARADA</span>
+                <span className="badge badge-plata">🥈 PLATA</span>
                 <span className="text-sm text-gray-700">100,000 - 999,999 DOGGY</span>
               </div>
             </div>
             
-            <div className="flex items-center justify-between p-2 bg-white rounded border border-red-400">
+            <div className="flex items-center justify-between p-2 bg-white rounded border border-yellow-400">
               <div className="flex items-center gap-2">
-                <span className="badge badge-infierno">🔥🔥🔥 INFIERNO</span>
+                <span className="badge badge-oro">🥇 ORO</span>
                 <span className="text-sm text-gray-700">1,000,000+ DOGGY</span>
               </div>
             </div>

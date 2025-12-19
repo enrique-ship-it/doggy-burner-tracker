@@ -8,7 +8,7 @@ interface ClaimNFTProps {
   walletAddress?: string;
 }
 
-type BurnLevel = 'chispa' | 'llamarada' | 'infierno' | null;
+type BurnLevel = 'bronce' | 'plata' | 'oro' | null;
 
 interface BurnerInfo {
   totalBurned: number;
@@ -56,29 +56,29 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
 
   const getNFTInfo = (level: BurnLevel) => {
     switch (level) {
-      case 'chispa':
+      case 'bronce':
         return {
-          name: 'DOGGY Burn Lord - Chispa',
-          emoji: '🔥',
+          name: 'The Burner - Bronce',
+          emoji: '🥉',
           description: 'Has quemado entre 10K-99K DOGGY',
-          color: 'from-orange-200 to-red-200',
+          color: 'from-orange-200 to-amber-300',
           borderColor: 'border-orange-400'
         };
-      case 'llamarada':
+      case 'plata':
         return {
-          name: 'DOGGY Burn Lord - Llamarada',
-          emoji: '🔥🔥',
+          name: 'The Burner - Plata',
+          emoji: '🥈',
           description: 'Has quemado entre 100K-999K DOGGY',
-          color: 'from-orange-300 to-red-300',
-          borderColor: 'border-orange-500'
+          color: 'from-gray-200 to-gray-300',
+          borderColor: 'border-gray-400'
         };
-      case 'infierno':
+      case 'oro':
         return {
-          name: 'DOGGY Burn Lord - Infierno',
-          emoji: '🔥🔥🔥',
+          name: 'The Burner - Oro',
+          emoji: '🥇',
           description: 'Has quemado más de 1M DOGGY',
-          color: 'from-red-400 to-orange-400',
-          borderColor: 'border-red-500'
+          color: 'from-yellow-200 to-amber-400',
+          borderColor: 'border-yellow-500'
         };
       default:
         return null;
@@ -108,13 +108,33 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
     setMessage('Preparando tu NFT certificado...');
     setMessageType('info');
 
-    // TODO: Implementar minteo real con Metaplex
-    // Por ahora simulamos el proceso
-    setTimeout(() => {
+    try {
+      // Importar dinámicamente para evitar errores de SSR
+      const { mintBurnerNFT } = await import('@/lib/nft');
+      
+      setMessage('Subiendo metadata a Arweave...');
+      
+      const result = await mintBurnerNFT(
+        wallet,
+        burnerInfo.level,
+        burnerInfo.totalBurned
+      );
+
+      setMessage(`🎉 ¡NFT Minteado! ${result.address.slice(0, 4)}...${result.address.slice(-4)}`);
+      setMessageType('success');
+      
+      // Abrir Solscan en nueva ventana
+      setTimeout(() => {
+        window.open(`https://solscan.io/token/${result.address}`, '_blank');
+      }, 1500);
+      
+    } catch (error: any) {
+      console.error('Error minting NFT:', error);
+      setMessage(`Error: ${error.message || 'No se pudo mintear el NFT. Intenta de nuevo.'}`);
+      setMessageType('error');
+    } finally {
       setMinting(false);
-      setMessage('⚠️ NFT Minting próximamente disponible. Tu nivel está registrado y podrás reclamar tu NFT cuando esté listo 🔥');
-      setMessageType('info');
-    }, 2000);
+    }
   };
 
   if (loading) {
