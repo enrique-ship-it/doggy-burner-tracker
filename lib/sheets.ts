@@ -25,24 +25,18 @@ async function getSheet() {
 
   console.log('[Sheets] Credentials found');
 
-  // Decodificar desde base64 o usar directamente si no es base64
+  // El formato esperado es: "-----BEGIN PRIVATE KEY-----\nMIIE....\n-----END PRIVATE KEY-----\n"
+  // Con \n literales (dos caracteres), NO saltos de línea reales
   let privateKey = process.env.GOOGLE_PRIVATE_KEY;
-  console.log('[Sheets] Raw key length:', privateKey.length, 'starts with:', privateKey.substring(0, 50));
+  console.log('[Sheets] Raw key length:', privateKey.length);
+  console.log('[Sheets] Key starts with:', privateKey.substring(0, 30));
+  console.log('[Sheets] Key ends with:', privateKey.substring(privateKey.length - 30));
   
-  // Si la key está en base64, decodificarla
-  if (!privateKey.includes('BEGIN PRIVATE KEY')) {
-    console.log('[Sheets] Key is base64, decoding...');
-    try {
-      privateKey = Buffer.from(privateKey, 'base64').toString('utf-8');
-      console.log('[Sheets] Decoded successfully, now starts with:', privateKey.substring(0, 50));
-    } catch (e) {
-      console.error('[Sheets] Error decoding base64 key:', e);
-      throw e;
-    }
-  } else {
-    console.log('[Sheets] Key already has BEGIN, replacing \\n');
-    privateKey = privateKey.replace(/\\n/g, '\n');
-  }
+  // Reemplazar \n literales (dos caracteres) por saltos de línea reales
+  privateKey = privateKey.replace(/\\n/g, '\n');
+  
+  console.log('[Sheets] After replacement, key starts with:', privateKey.substring(0, 30));
+  console.log('[Sheets] After replacement, key ends with:', privateKey.substring(privateKey.length - 30));
 
   console.log('[Sheets] Creating JWT auth...');
   const serviceAccountAuth = new JWT({
@@ -57,9 +51,9 @@ async function getSheet() {
   console.log('[Sheets] Loading info...');
   try {
     await doc.loadInfo();
-    console.log('[Sheets] loadInfo success');
+    console.log('[Sheets] ✅ loadInfo success!');
   } catch (error) {
-    console.error('[Sheets] loadInfo failed:', error instanceof Error ? error.message : error);
+    console.error('[Sheets] ❌ loadInfo failed:', error instanceof Error ? error.message : error);
     throw error;
   }
   
