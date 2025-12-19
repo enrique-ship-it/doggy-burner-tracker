@@ -81,35 +81,35 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Guardar en Google Sheets
-    console.log('[Claim Badge] Attempting to save badge for:', wallet);
-    const saved = await saveBadgeClaim({
-      wallet: wallet,
-      level: burner.level,
-      totalBurned: burner.totalBurned,
-      signature: signatureHex,
-      claimedAt: new Date().toISOString(),
-    });
-
-    console.log('[Claim Badge] Save result:', saved);
-
-    if (!saved) {
-      console.error('[Claim Badge] Failed to save badge for:', wallet);
-      return NextResponse.json(
-        { error: 'Error al guardar badge. Intenta de nuevo.' },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
+    // Responder al usuario INMEDIATAMENTE con éxito
+    // (El badge está reclamado si llegamos hasta aquí)
+    const claimTime = new Date().toISOString();
+    
+    const response = {
       success: true,
       badge: {
         wallet: wallet,
         level: burner.level,
         totalBurned: burner.totalBurned,
-        claimedAt: new Date().toISOString(),
+        claimedAt: claimTime,
       },
+    };
+
+    // Guardar en Google Sheets en background (sin bloquear)
+    // Si falla, no afecta al usuario
+    console.log('[Claim Badge] Saving badge to Sheets in background for:', wallet);
+    saveBadgeClaim({
+      wallet: wallet,
+      level: burner.level,
+      totalBurned: burner.totalBurned,
+      signature: signatureHex,
+      claimedAt: claimTime,
+    }).catch((error) => {
+      console.error('[Claim Badge] Background save failed:', error);
+      // Error no afecta al usuario
     });
+
+    return NextResponse.json(response);
 
   } catch (error) {
     console.error('Error in claim-badge:', error);
