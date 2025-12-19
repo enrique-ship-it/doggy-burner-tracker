@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { DEV_WALLET } from '../lib/solana';
 import { COPY_FEEDBACK_DELAY } from '../lib/constants';
+import { trackEvent } from '../lib/analytics';
 
 export function DonateButton() {
   const [copied, setCopied] = useState(false);
@@ -11,6 +12,9 @@ export function DonateButton() {
     navigator.clipboard.writeText(DEV_WALLET.toBase58());
     setCopied(true);
     setTimeout(() => setCopied(false), COPY_FEEDBACK_DELAY);
+    
+    // Track donación intent
+    trackEvent('donate_wallet_copied');
   };
 
   return (
