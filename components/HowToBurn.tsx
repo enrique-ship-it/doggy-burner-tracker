@@ -78,10 +78,10 @@ export function HowToBurn() {
         <div className="mb-6">
           <h4 className="text-meme-bold text-lg mb-4">📱 Pasos para Quemar</h4>
           
-          <div className="space-y-4">
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
-                1
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">1.</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold text-base mb-1">Abre tu Wallet</h5>
@@ -91,9 +91,9 @@ export function HowToBurn() {
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
-                2
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">2.</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold text-base mb-1">Selecciona DOGGY Token</h5>
@@ -103,9 +103,9 @@ export function HowToBurn() {
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
-                3
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">3.</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold text-base mb-1">Haz clic en Enviar/Send</h5>
@@ -115,9 +115,9 @@ export function HowToBurn() {
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
-                4
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">4.</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold text-base mb-1">Pega la dirección</h5>
@@ -127,9 +127,9 @@ export function HowToBurn() {
               </div>
             </div>
 
-            <div className="flex gap-4">
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-fire text-white flex items-center justify-center font-bold text-lg shadow-md">
-                5
+            <div className="flex gap-3">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-fire">5.</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold text-base mb-1">Confirma y Espera</h5>
@@ -140,8 +140,8 @@ export function HowToBurn() {
             </div>
 
             <div className="flex gap-3">
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white flex items-center justify-center font-bold">
-                ✓
+              <div className="flex-shrink-0">
+                <span className="text-2xl">✓</span>
               </div>
               <div className="flex-1">
                 <h5 className="text-meme-bold mb-1">¡Listo! 🎉</h5>
