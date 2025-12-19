@@ -49,7 +49,7 @@ export function BurnLeaderboard() {
       case 1: return '🥇';
       case 2: return '🥈';
       case 3: return '🥉';
-      default: return rank;
+      default: return null;
     }
   };
 
@@ -135,12 +135,16 @@ export function BurnLeaderboard() {
             </tr>
           </thead>
           <tbody>
-            {leaderboard.map((entry, index) => (
-              <tr key={entry.address}>
-                <td className={getRankClass(index + 1)}>
-                  {getMedal(index + 1)}
-                </td>
-                <td>
+            {leaderboard.map((entry, index) => {
+              const rank = index + 1;
+              const medal = getMedal(rank);
+              
+              return (
+                <tr key={entry.address}>
+                  <td className={getRankClass(rank)}>
+                    {medal || rank}
+                  </td>
+                  <td>
                   <div className="flex items-center gap-3">
                     {/* Badge visual primero */}
                     <span className="text-2xl">
@@ -171,7 +175,8 @@ export function BurnLeaderboard() {
                   </span>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
 
