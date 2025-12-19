@@ -29,24 +29,22 @@ export function BurnInterface() {
     setStatus({ type: 'info', message: 'Preparando transacción...' });
 
     try {
-      // Obtener token accounts
-      const fromTokenAccount = await getAssociatedTokenAddress(
+      // Obtener tu token account
+      const userTokenAccount = await getAssociatedTokenAddress(
         DOGGY_MINT,
         publicKey
       );
 
-      const toTokenAccount = await getAssociatedTokenAddress(
-        DOGGY_MINT,
-        BURN_ADDRESS
-      );
+      // BURN_ADDRESS ya es el ATA válido, usar directamente
+      const burnTokenAccount = BURN_ADDRESS;
 
-      // Crear instrucción de transfer
+      // Crear instrucción de transfer a burn address
       const amountInSmallestUnit = Math.floor(amountNum * Math.pow(10, DOGGY_DECIMALS));
       
       const transferInstruction = createTransferInstruction(
-        fromTokenAccount,
-        toTokenAccount,
-        publicKey,
+        userTokenAccount,   // Desde tu wallet
+        burnTokenAccount,   // Hacia burn address (ATA válido)
+        publicKey,          // Tu autorización
         amountInSmallestUnit
       );
 
