@@ -1,15 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-interface BurnerStats {
-  address: string;
-  totalBurned: number;
-  burnCount: number;
-  level: 'bronce' | 'plata' | 'oro';
-  firstBurn: number;
-  lastBurn: number;
-}
+import { BurnerStats } from '@/lib/types';
 
 export function BurnLeaderboard() {
   const [leaderboard, setLeaderboard] = useState<BurnerStats[]>([]);
