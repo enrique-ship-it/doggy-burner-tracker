@@ -121,7 +121,7 @@ export function BurnStats() {
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           
           <div>
             <p className="number-stonks shake-money">
@@ -154,52 +154,16 @@ export function BurnStats() {
             </p>
           </div>
 
-        </div>
-
-        <div className="mt-6 pt-4 border-t-2 border-gray-300">
-          <h3 className="text-meme-bold text-center mb-4">📉 Impacto de Deflación</h3>
-          <div className="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded border-2 border-fire">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              
-              <div className="text-center">
-                <p className="text-3xl font-bold text-fire">
-                  {calculateDeflation(stats.totalBurned).toFixed(3)}%
-                </p>
-                <p className="text-meme text-sm mt-1">del supply quemado</p>
-                <p className="text-xs text-gray-600 mt-1">
-                  Supply total: {calculateTotalSupply().toLocaleString()}
-                </p>
-              </div>
-
-              <div className="text-center">
-                <p className="text-3xl font-bold text-fire">
-                  {formatMillions(stats.totalBurned)} 🔥
-                </p>
-                <p className="text-meme text-sm mt-1">tokens irrecuperables</p>
-                <p className="text-xs text-gray-600 mt-1">
-                  Enviados a {BURN_ADDRESS.toBase58().slice(0, 8)}...
-                </p>
-              </div>
-
-              <div className="text-center">
-                <p className="text-3xl font-bold text-fire">
-                  {stats.totalBurners}
-                </p>
-                <p className="text-meme text-sm mt-1">wallets participando</p>
-                <p className="text-xs text-gray-600 mt-1">
-                  <a
-                    href={`https://solscan.io/account/${BURN_ADDRESS.toBase58()}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-fire hover:underline"
-                  >
-                    Ver burns en Solscan ↗
-                  </a>
-                </p>
-              </div>
-
-            </div>
+          <div>
+            <p className="number-stonks text-fire">
+              {calculateDeflation(stats.totalBurned).toFixed(3)}%
+            </p>
+            <p className="text-meme">del supply quemado</p>
+            <p className="text-xs text-gray-500 mt-1">
+              Supply total: 1,000,000,000
+            </p>
           </div>
+
         </div>
 
         <div className="mt-4 pt-4 border-t-2 border-gray-300">
