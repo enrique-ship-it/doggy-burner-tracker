@@ -120,14 +120,17 @@ export async function hasBadge(wallet: string): Promise<BadgeRecord | null> {
  */
 export async function getAllBadgeHolders(): Promise<BadgeRecord[]> {
   try {
+    console.log('[Sheets] Getting all badge holders...');
     const doc = await getSheet();
     const badgesSheet = doc.sheetsByTitle['Badges'];
     
     if (!badgesSheet) {
+      console.log('[Sheets] Badges sheet not found!');
       return [];
     }
 
     const rows = await badgesSheet.getRows();
+    console.log(`[Sheets] Found ${rows.length} badge rows`);
     
     return rows.map((row: any) => ({
       wallet: row.get('Wallet'),
@@ -137,7 +140,7 @@ export async function getAllBadgeHolders(): Promise<BadgeRecord[]> {
       claimedAt: row.get('Claimed At'),
     }));
   } catch (error) {
-    console.error('Error getting badge holders:', error);
+    console.error('[Sheets] Error getting badge holders:', error);
     return [];
   }
 }

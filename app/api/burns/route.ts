@@ -22,6 +22,10 @@ export async function GET() {
     
     // Obtener badges reclamados
     const badgeHolders = await getAllBadgeHolders();
+    console.log(`[API] Badge holders found: ${badgeHolders.length}`);
+    if (badgeHolders.length > 0) {
+      console.log('[API] Sample badge holder:', badgeHolders[0]);
+    }
     const badgeWallets = new Set(badgeHolders.map(b => b.wallet.toLowerCase()));
     
     // Calcular leaderboard y stats
