@@ -37,6 +37,7 @@ async function getSheet() {
  */
 export async function saveBadgeClaim(badge: BadgeRecord): Promise<boolean> {
   try {
+    console.log('[Sheets] Saving badge claim for:', badge.wallet);
     const doc = await getSheet();
     
     // Debug: imprimir todos los sheets disponibles
@@ -50,20 +51,25 @@ export async function saveBadgeClaim(badge: BadgeRecord): Promise<boolean> {
       return false;
     }
 
+    console.log('[Sheets] Found Badges sheet, loading rows...');
     // Verificar si ya existe
     const rows = await badgesSheet.getRows();
+    console.log(`[Sheets] Loaded ${rows.length} existing rows`);
     const existing = rows.find((row: any) => 
       row.get('Wallet')?.toLowerCase() === badge.wallet.toLowerCase()
     );
 
     if (existing) {
+      console.log('[Sheets] Updating existing badge for:', badge.wallet);
       // Actualizar existente (si quemó más)
       existing.set('Level', badge.level);
       existing.set('Total Burned', badge.totalBurned);
       existing.set('Signature', badge.signature);
       existing.set('Claimed At', badge.claimedAt);
       await existing.save();
+      console.log('[Sheets] Badge updated successfully');
     } else {
+      console.log('[Sheets] Adding new badge row for:', badge.wallet);
       // Crear nuevo
       await badgesSheet.addRow({
         'Wallet': badge.wallet,
@@ -72,11 +78,16 @@ export async function saveBadgeClaim(badge: BadgeRecord): Promise<boolean> {
         'Signature': badge.signature,
         'Claimed At': badge.claimedAt,
       });
+      console.log('[Sheets] Badge added successfully');
     }
 
     return true;
   } catch (error) {
-    console.error('Error saving badge to Sheets:', error);
+    console.error('[Sheets] Error saving badge to Sheets:', error);
+    if (error instanceof Error) {
+      console.error('[Sheets] Error message:', error.message);
+      console.error('[Sheets] Error stack:', error.stack);
+    }
     return false;
   }
 }

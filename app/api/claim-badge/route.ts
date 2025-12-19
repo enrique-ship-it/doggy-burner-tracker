@@ -82,6 +82,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Guardar en Google Sheets
+    console.log('[Claim Badge] Attempting to save badge for:', wallet);
     const saved = await saveBadgeClaim({
       wallet: wallet,
       level: burner.level,
@@ -90,7 +91,10 @@ export async function POST(req: NextRequest) {
       claimedAt: new Date().toISOString(),
     });
 
+    console.log('[Claim Badge] Save result:', saved);
+
     if (!saved) {
+      console.error('[Claim Badge] Failed to save badge for:', wallet);
       return NextResponse.json(
         { error: 'Error al guardar badge. Intenta de nuevo.' },
         { status: 500 }
