@@ -44,7 +44,7 @@ export default function Home() {
         {/* MAIN CONTENT */}
         <main className="max-w-6xl mx-auto px-4 pb-12">
           
-          {/* HERO - Compacto y directo */}
+          {/* HERO - Explicación clara del propósito */}
           <div className="text-center mb-12 max-h-[60vh]">
             <Image 
               src="/doggy.png" 
@@ -56,23 +56,46 @@ export default function Home() {
             <h2 className="title-meme text-3xl mb-2">
               <span className="fire-emoji">🔥</span> DOGGY BURN TRACKER <span className="fire-emoji">🔥</span>
             </h2>
-            <p className="subtitle-meme-enhanced text-lg mb-6">
-              donde los tokens vienen a morir (profesionalmente)
+            <p className="subtitle-meme-enhanced text-lg mb-4">
+              La competencia oficial de quema de tokens DOGGY
             </p>
             
-            {/* CTA Principal único */}
+            {/* Propuesta de valor clara */}
+            <div className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm p-6 rounded-lg border-2 border-gray-300 shadow-lg mb-6">
+              <p className="text-meme text-base mb-3">
+                <strong>¿Qué es esto?</strong> El leaderboard oficial donde la comunidad DOGGY compite quemando tokens.
+              </p>
+              <p className="text-meme text-base mb-3">
+                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply y te conviertes en Burn Lord 🏆
+              </p>
+              <p className="text-meme text-sm text-gray-600">
+                Cuantos más DOGGY quemes, más alto subes en el leaderboard. Simple.
+              </p>
+            </div>
+            
+            {/* CTA Principal */}
             <a href="#burn" className="btn-win98 btn-tie btn-xl inline-block">
-              🔥 Empezar a Quemar
+              🔥 Ver Cómo Participar
             </a>
           </div>
 
-          {/* HOW TO BURN - Tutorial primero */}
+          {/* STATS - Muestra el estado del juego */}
           <div className="spacing-lg">
+            <BurnStats />
+          </div>
+
+          {/* LEADERBOARD - Competencia visible */}
+          <div id="leaderboard" className="spacing-lg">
+            <BurnLeaderboard />
+          </div>
+
+          {/* HOW TO BURN - Ahora sí, instrucciones */}
+          <div id="burn" className="spacing-lg">
             <HowToBurn />
           </div>
 
-          {/* 2 COLUMN LAYOUT: BURN & LOOKUP - Acción primaria */}
-          <div id="burn" className="spacing-xl grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* 2 COLUMN LAYOUT: BURN & LOOKUP - Acción */}
+          <div className="spacing-xl grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* BURN INTERFACE - Ocupa 2/3 del espacio */}
             <div className="lg:col-span-2">
               <BurnInterface />
@@ -82,16 +105,6 @@ export default function Home() {
             <div className="lg:col-span-1">
               <WalletLookup />
             </div>
-          </div>
-
-          {/* STATS - Contexto del juego */}
-          <div className="spacing-lg">
-            <BurnStats />
-          </div>
-
-          {/* LEADERBOARD - Competencia */}
-          <div id="leaderboard" className="spacing-lg">
-            <BurnLeaderboard />
           </div>
 
           {/* RECENT BURNS - Actividad */}
