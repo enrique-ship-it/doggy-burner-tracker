@@ -155,7 +155,7 @@ export function HowToBurn() {
 
         {/* NIVELES DE BURN LORDS */}
         <div className="bg-gray-50 p-4 rounded-lg border-2 border-gray-300 mb-6">
-          <h4 className="text-meme-bold text-lg mb-3">🏆 Niveles de Burn Lords</h4>
+          <h4 className="text-meme-bold text-lg mb-3">🏆 Niveles de DoggyQuemadores</h4>
           
           <div className="space-y-2">
             <div className="flex items-center justify-between p-2 bg-white rounded border border-orange-200">

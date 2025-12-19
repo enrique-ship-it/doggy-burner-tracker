@@ -148,7 +148,7 @@ export function BurnStats() {
             <p className="number-stonks number-red">
               {stats.totalBurners}
             </p>
-            <p className="text-meme">burn lords activos</p>
+            <p className="text-meme">DoggyQuemadores activos</p>
             <p className="text-xs text-gray-500 mt-1">
               {stats.totalTransactions} burns totales
             </p>

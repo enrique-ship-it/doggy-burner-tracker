@@ -89,7 +89,7 @@ export function BurnLeaderboard() {
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content">
-          <p className="text-center text-meme py-8">Cargando burn lords...</p>
+          <p className="text-center text-meme py-8">Cargando DoggyQuemadores...</p>
         </div>
       </div>
     );
@@ -112,7 +112,7 @@ export function BurnLeaderboard() {
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content text-center py-8">
-          <p className="text-meme-bold">No hay burn lords todavía</p>
+          <p className="text-meme-bold">No hay DoggyQuemadores todavía</p>
           <p className="text-meme text-sm mt-2">Sé el primero en quemar 🔥</p>
         </div>
       </div>
@@ -122,7 +122,7 @@ export function BurnLeaderboard() {
   return (
     <div className="window-98 window-98-tie">
       <div className="window-titlebar">
-        <span>🏆 leaderboard.exe - Top Burn Lords</span>
+        <span>🏆 leaderboard.exe - Top DoggyQuemadores</span>
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content p-0">
@@ -130,7 +130,7 @@ export function BurnLeaderboard() {
           <thead>
             <tr>
               <th className="w-16">#</th>
-              <th>Burn Lord</th>
+              <th>DoggyQuemador</th>
               <th className="text-right">Total Quemado</th>
             </tr>
           </thead>

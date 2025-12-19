@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "DOGGY Burner Tracker - Quema tus tokens profesionalmente",
-  description: "Track y quema tokens DOGGY. Leaderboard de burn lords.",
+  description: "Track y quema tokens DOGGY. Leaderboard de DoggyQuemadores.",
   openGraph: {
     title: "DOGGY Burner Tracker",
     description: "Compite en el leaderboard quemando DOGGY tokens",

@@ -168,7 +168,7 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content text-center py-8">
-          <p className="text-meme">Verificando tu estatus de Burn Lord...</p>
+          <p className="text-meme">Verificando tu estatus de DoggyQuemador...</p>
         </div>
       </div>
     );
@@ -186,7 +186,7 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
             <div className="text-6xl mb-4">🔥</div>
             <h3 className="text-meme-bold text-xl mb-3">NFT Certificado Gratis</h3>
             <p className="text-meme text-sm text-gray-600 mb-2">
-              Demuestra tu estatus de Burn Lord on-chain
+              Demuestra tu estatus de DoggyQuemador on-chain
             </p>
             <p className="text-xs text-fire font-bold">
               Solo pagas gas (~0.01 SOL)
@@ -316,7 +316,7 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
             <p className="font-bold mb-2">✨ Beneficios del NFT:</p>
             <ul className="space-y-1 text-left max-w-xs mx-auto">
               <li>• Certificado verificable on-chain</li>
-              <li>• Prueba de que eres un verdadero Burn Lord</li>
+              <li>• Prueba de que eres un verdadero DoggyQuemador</li>
               <li>• Coleccionable único según tu nivel</li>
               <li>• Flex en tu wallet forever</li>
             </ul>
