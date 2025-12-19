@@ -34,17 +34,15 @@ export function RecentBurns() {
     return `hace ${Math.floor(seconds / 86400)} días`;
   };
 
-  const formatBurnAmount = (amountInMillions: number): string => {
-    // API devuelve amount ya en millones (0.2 = 200K DOGGY)
-    const exactTokens = amountInMillions * 1_000_000;
-    
-    if (exactTokens >= 1_000_000) {
-      return `${amountInMillions.toFixed(2)}M`;
+  const formatBurnAmount = (tokens: number): string => {
+    // API devuelve tokens completos (10000 = 10K DOGGY)
+    if (tokens >= 1_000_000) {
+      return `${(tokens / 1_000_000).toFixed(2)}M`;
     }
-    if (exactTokens >= 1_000) {
-      return `${(exactTokens / 1_000).toFixed(0)}K`;
+    if (tokens >= 1_000) {
+      return `${(tokens / 1_000).toFixed(0)}K`;
     }
-    return exactTokens.toLocaleString();
+    return tokens.toLocaleString();
   };
 
   const truncateAddress = (address: string): string => {

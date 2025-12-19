@@ -90,10 +90,19 @@ export function BurnStats() {
     );
   }
 
-  // La API ya devuelve tokens en millones (ej: 2.2 = 2.2M DOGGY)
+  // La API devuelve tokens completos (ej: 200000 = 200K DOGGY)
 
-  const formatExactTokens = (millions: number): string => {
-    const tokens = millions * 1_000_000;
+  const formatTokensDisplay = (tokens: number): string => {
+    if (tokens >= 1_000_000) {
+      return `${(tokens / 1_000_000).toFixed(2)}M`;
+    }
+    if (tokens >= 1_000) {
+      return `${(tokens / 1_000).toFixed(1)}K`;
+    }
+    return tokens.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  };
+
+  const formatExactTokens = (tokens: number): string => {
     return tokens.toLocaleString('en-US', { maximumFractionDigits: 0 });
   };
 
@@ -101,17 +110,16 @@ export function BurnStats() {
     return 1_000_000_000; // 1 mil millones DOGGY
   };
 
-  const calculateDeflation = (millions: number): number => {
-    const burned = millions * 1_000_000; // Convertir a tokens
+  const calculateDeflation = (tokens: number): number => {
     const totalSupply = calculateTotalSupply();
-    return (burned / totalSupply) * 100;
+    return (tokens / totalSupply) * 100;
   };
 
-  const estimateValueInUSD = (millions: number): number => {
+  const estimateValueInUSD = (tokens: number): number => {
     // Precio aproximado basado en datos de mercado
     // 2.2M DOGGY ≈ $644.46 USD según Solscan
-    const pricePerMillion = 644.46 / 2.2; // ≈ $293 por millón de DOGGY
-    return millions * pricePerMillion;
+    const pricePerMillion = 644.46 / 2_200_000; // precio por token
+    return tokens * pricePerMillion;
   };
 
   return (
@@ -125,7 +133,7 @@ export function BurnStats() {
           
           <div>
             <p className="number-stonks shake-money">
-              {formatMillions(stats.totalBurned)} DOGGY
+              {formatTokensDisplay(stats.totalBurned)} DOGGY
             </p>
             <p className="text-meme">tokens quemados</p>
             <p className="text-xs text-gray-500 mt-1">

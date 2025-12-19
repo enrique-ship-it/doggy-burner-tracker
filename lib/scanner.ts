@@ -1,7 +1,7 @@
 // Scanner de blockchain para detectar burns de DOGGY
 // Sprint 1: Implementación completa
 
-import { connection, DOGGY_MINT, BURN_ADDRESS, DOGGY_DECIMALS, getLevel } from './solana';
+import { connection, DOGGY_MINT, BURN_ADDRESS, BURN_WALLET, DOGGY_DECIMALS, getLevel } from './solana';
 import { BurnTransaction, BurnerStats, GlobalStats } from './types';
 import { ParsedTransactionWithMeta } from '@solana/web3.js';
 
@@ -33,13 +33,12 @@ export async function scanBurns(
     const batchSize = 100;
     let totalFetched = 0;
     
-    // ESTRATEGIA FINAL: Escanear la dirección oficial de burns de DOGGY
-    // Esta es el Associated Token Account (ATA) donde llegan todos los burns
-    // Muchas menos transacciones = más rápido y evita límite de Helius
-    const maxTransactions = 1000; // Reducido porque hay pocas transacciones
+    // ESTRATEGIA: Buscar transacciones del token DOGGY que incluyan alguna dirección de burn
+    // Esto filtra solo DOGGY y evita saturar con todos los tokens
+    const maxTransactions = 1000;
     
     while (burns.length < limit && totalFetched < maxTransactions) {
-      // Escanear directamente la dirección de burn ATA
+      // Buscar transacciones del ATA específico de DOGGY burns
       const url: string = `https://api.helius.xyz/v0/addresses/${BURN_ADDRESS.toString()}/transactions?api-key=${heliusApiKey}&limit=${batchSize}${beforeSignature ? `&before=${beforeSignature}` : ''}`;
 
       const response = await fetch(url);
@@ -103,16 +102,18 @@ function extractBurnFromHeliusTx(tx: any): BurnTransaction | null {
       return null;
     }
 
-    // Buscar transfer de DOGGY a la dirección de burn ATA
+    // Buscar transfer de DOGGY a cualquier dirección de burn
     for (const transfer of tx.tokenTransfers) {
       const isDoggy = transfer.mint === DOGGY_MINT.toString();
-      // La dirección de destino es el ATA (toTokenAccount)
+      // Verificar tanto el ATA como el usuario destino
       const destinationATA = transfer.toTokenAccount || '';
-      const isToBurn = destinationATA === BURN_ADDRESS.toString();
+      const destinationUser = transfer.toUserAccount || '';
+      const isToBurnATA = destinationATA === BURN_ADDRESS.toString();
+      const isToBurnWallet = destinationUser === BURN_WALLET.toString();
 
-      if (isDoggy && isToBurn) {
-        // Convertir de unidades mínimas a tokens
-        const amount = transfer.tokenAmount / Math.pow(10, DOGGY_DECIMALS);
+      if (isDoggy && (isToBurnATA || isToBurnWallet)) {
+        // Helius ya devuelve tokenAmount en formato decimal (tokens, no unidades mínimas)
+        const amount = transfer.tokenAmount;
         
         return {
           signature: tx.signature,

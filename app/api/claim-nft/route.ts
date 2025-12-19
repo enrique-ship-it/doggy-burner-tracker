@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Wallet inválida' }, { status: 400 });
     }
     
-    if (!level || !['chispa', 'llamarada', 'infierno'].includes(level.toLowerCase())) {
+    if (!level || !['bronce', 'plata', 'oro'].includes(level.toLowerCase())) {
       return NextResponse.json({ error: 'Nivel inválido' }, { status: 400 });
     }
     

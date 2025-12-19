@@ -66,18 +66,14 @@ export function BurnLeaderboard() {
     return `${addr.slice(0, 4)}...${addr.slice(-4)}`;
   };
 
-  // La API devuelve valores ya en millones (ej: 1.031815 = 1.03M DOGGY)
-  const formatBurned = (millions: number): string => {
-    if (millions >= 1) {
-      return `${millions.toFixed(2)}M`;
+  // La API devuelve valores en tokens (ej: 200000 = 200K DOGGY)
+  const formatBurned = (tokens: number): string => {
+    if (tokens >= 1_000_000) {
+      return `${(tokens / 1_000_000).toFixed(2)}M`;
     }
-    // Si es menor a 1M, mostrar en K
-    const thousands = millions * 1000;
-    if (thousands >= 1) {
-      return `${thousands.toFixed(1)}K`;
+    if (tokens >= 1_000) {
+      return `${(tokens / 1_000).toFixed(1)}K`;
     }
-    // Si es muy pequeño, mostrar tokens exactos
-    const tokens = millions * 1_000_000;
     return tokens.toLocaleString('en-US', { maximumFractionDigits: 0 });
   };
 
