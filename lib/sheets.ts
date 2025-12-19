@@ -14,35 +14,54 @@ export interface BadgeRecord {
  * Obtiene el documento de Google Sheets autenticado
  */
 async function getSheet() {
+  console.log('[Sheets] getSheet() called');
+  
   if (!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || 
       !process.env.GOOGLE_PRIVATE_KEY || 
       !process.env.GOOGLE_SHEET_ID) {
+    console.error('[Sheets] Missing credentials - EMAIL:', !!process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL, 'KEY:', !!process.env.GOOGLE_PRIVATE_KEY, 'SHEET_ID:', !!process.env.GOOGLE_SHEET_ID);
     throw new Error('Google Sheets credentials not configured');
   }
 
+  console.log('[Sheets] Credentials found');
+
   // Decodificar desde base64 o usar directamente si no es base64
   let privateKey = process.env.GOOGLE_PRIVATE_KEY;
+  console.log('[Sheets] Raw key length:', privateKey.length, 'starts with:', privateKey.substring(0, 50));
   
   // Si la key está en base64, decodificarla
   if (!privateKey.includes('BEGIN PRIVATE KEY')) {
+    console.log('[Sheets] Key is base64, decoding...');
     try {
       privateKey = Buffer.from(privateKey, 'base64').toString('utf-8');
+      console.log('[Sheets] Decoded successfully, now starts with:', privateKey.substring(0, 50));
     } catch (e) {
       console.error('[Sheets] Error decoding base64 key:', e);
+      throw e;
     }
   } else {
-    // Si tiene \n literales, reemplazarlos
+    console.log('[Sheets] Key already has BEGIN, replacing \\n');
     privateKey = privateKey.replace(/\\n/g, '\n');
   }
 
+  console.log('[Sheets] Creating JWT auth...');
   const serviceAccountAuth = new JWT({
     email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
     key: privateKey,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
+  console.log('[Sheets] Creating document...');
   const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, serviceAccountAuth);
-  await doc.loadInfo();
+  
+  console.log('[Sheets] Loading info...');
+  try {
+    await doc.loadInfo();
+    console.log('[Sheets] loadInfo success');
+  } catch (error) {
+    console.error('[Sheets] loadInfo failed:', error instanceof Error ? error.message : error);
+    throw error;
+  }
   
   return doc;
 }
@@ -98,10 +117,18 @@ export async function saveBadgeClaim(badge: BadgeRecord): Promise<boolean> {
 
     return true;
   } catch (error) {
-    console.error('[Sheets] Error saving badge to Sheets:', error);
+    console.error('[Sheets] ❌ ERROR saving badge to Sheets');
+    console.error('[Sheets] Error object:', error);
     if (error instanceof Error) {
       console.error('[Sheets] Error message:', error.message);
-      console.error('[Sheets] Error stack:', error.stack);
+      console.error('[Sheets] Error name:', error.name);
+      console.error('[Sheets] Error code:', (error as any).code);
+      console.error('[Sheets] Error status:', (error as any).status);
+      if (error.stack) {
+        console.error('[Sheets] Error stack:', error.stack.split('\n').slice(0, 5).join('\n'));
+      }
+    } else {
+      console.error('[Sheets] Error is not an Error instance:', typeof error);
     }
     return false;
   }
