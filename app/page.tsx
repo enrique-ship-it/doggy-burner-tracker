@@ -3,13 +3,10 @@
 import Image from 'next/image';
 import { BurnLeaderboard } from '@/components/BurnLeaderboard';
 import { BurnStats } from '@/components/BurnStats';
-import { BurnInterface } from '@/components/BurnInterface';
 import { WalletLookup } from '@/components/WalletLookup';
 import { RecentBurns } from '@/components/RecentBurns';
 import { HowToBurn } from '@/components/HowToBurn';
-import { ClaimNFT } from '@/components/ClaimNFT';
 import { DonateButton } from '@/components/DonateButton';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function Home() {
   return (
@@ -35,7 +32,7 @@ export default function Home() {
               La competencia oficial de quema de tokens DOGGY
             </p>
             
-            {/* Propuesta de valor clara */}
+            {/* Propuesta de valor clara + SEGURIDAD */}
             <div className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm p-6 rounded-lg border-2 border-gray-300 shadow-lg mb-6">
               <p className="text-meme text-base mb-3">
                 <strong>¿Qué es esto?</strong> El leaderboard oficial donde la comunidad DOGGY compite quemando tokens.
@@ -43,6 +40,18 @@ export default function Home() {
               <p className="text-meme text-base mb-3">
                 <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply, te conviertes en DoggyQuemador 🏆 <strong>y recibes un NFT conmemorativo gratis</strong> 🎨
               </p>
+              
+              {/* SEGURIDAD DESTACADA */}
+              <div className="bg-green-50 border-2 border-green-500 p-4 rounded mt-4 mb-3">
+                <p className="text-sm font-bold text-green-800 mb-2">
+                  🔒 <strong>100% SEGURO - SIN CONECTAR WALLET</strong>
+                </p>
+                <p className="text-xs text-green-700">
+                  Nunca te pedimos conectar tu wallet. Todo es manual y verificable on-chain. 
+                  Tu wallet, tu control total.
+                </p>
+              </div>
+              
               <p className="text-meme text-sm text-gray-600">
                 Cuantos más DOGGY quemes, más alto subes en el leaderboard. Simple.
               </p>
@@ -69,27 +78,14 @@ export default function Home() {
             <HowToBurn />
           </div>
 
-          {/* 2 COLUMN LAYOUT: BURN & LOOKUP - Acción */}
-          <div className="spacing-xl grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-            {/* BURN INTERFACE - Ocupa 2/3 del espacio */}
-            <div className="lg:col-span-2">
-              <BurnInterface />
-            </div>
-            
-            {/* WALLET LOOKUP - Ocupa 1/3 del espacio */}
-            <div className="lg:col-span-1">
-              <WalletLookup />
-            </div>
+          {/* WALLET LOOKUP - Buscar posición y reclamar NFT */}
+          <div className="spacing-lg">
+            <WalletLookup />
           </div>
 
           {/* RECENT BURNS - Actividad */}
           <div className="spacing-md">
             <RecentBurns />
-          </div>
-
-          {/* CLAIM NFT - Recompensa (solo para quienes YA quemaron) */}
-          <div id="nft" className="spacing-xl">
-            <ClaimNFT />
           </div>
 
           {/* DONATE - Al final, opcional */}

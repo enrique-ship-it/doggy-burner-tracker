@@ -29,9 +29,22 @@ export function HowToBurn() {
           <h3 className="text-meme-bold text-xl mb-2">
             🔥 Cómo Aparecer en el Dashboard
           </h3>
-          <p className="text-meme text-sm text-gray-600">
-            No necesitas conectar wallet. Solo envía DOGGY a la dirección oficial.
+          <p className="text-meme text-sm text-gray-600 mb-3">
+            Todo manual desde TU wallet. Sin conectar, sin firmar, sin riesgos.
           </p>
+          
+          {/* SEGURIDAD PROMINENTE */}
+          <div className="bg-green-50 border-2 border-green-500 p-4 rounded inline-block">
+            <p className="text-sm font-bold text-green-800 mb-2">
+              🔒 <strong>PROCESO 100% SEGURO</strong>
+            </p>
+            <ul className="text-xs text-green-700 text-left space-y-1">
+              <li>✅ <strong>Desde tu wallet</strong> - Tú controlas todo</li>
+              <li>✅ <strong>Sin conectar</strong> - Nunca te pedimos acceso</li>
+              <li>✅ <strong>Sin firmar nada</strong> - Solo transfer normal</li>
+              <li>✅ <strong>Verificable on-chain</strong> - Datos públicos</li>
+            </ul>
+          </div>
         </div>
 
         {/* DIRECCIÓN OFICIAL */}
