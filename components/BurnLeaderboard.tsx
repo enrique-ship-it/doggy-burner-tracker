@@ -129,11 +129,9 @@ export function BurnLeaderboard() {
         <table className="table-leaderboard">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Wallet</th>
-              <th>Quemado</th>
-              <th>Burns</th>
-              <th>Nivel</th>
+              <th className="w-16">#</th>
+              <th>Burn Lord</th>
+              <th className="text-right">Total Quemado</th>
             </tr>
           </thead>
           <tbody>
@@ -143,23 +141,33 @@ export function BurnLeaderboard() {
                   {getMedal(index + 1)}
                 </td>
                 <td>
-                  <span className="code-address">
-                    {shortenAddress(entry.address)}
+                  <div className="flex items-center gap-3">
+                    {/* Badge visual primero */}
+                    <span className="text-2xl">
+                      {entry.level === 'infierno' && '💀🔥'}
+                      {entry.level === 'llamarada' && '🔥🔥'}
+                      {entry.level === 'chispa' && '🔥'}
+                    </span>
+                    {/* Wallet + nivel en texto */}
+                    <div>
+                      <span className="font-mono text-sm font-medium">
+                        {shortenAddress(entry.address)}
+                      </span>
+                      <span className="text-xs text-gray-500 ml-2">
+                        {entry.level.toUpperCase()}
+                      </span>
+                      <span className="text-xs text-gray-400 ml-2">
+                        • {entry.burnCount}x
+                      </span>
+                    </div>
+                  </div>
+                </td>
+                <td className="text-right">
+                  <span className="font-bold text-lg">
+                    {formatBurned(entry.totalBurned)}
                   </span>
-                </td>
-                <td className="text-meme-bold">
-                  {formatBurned(entry.totalBurned)} DOGGY
-                </td>
-                <td className="text-meme">
-                  {entry.burnCount}x
-                </td>
-                <td>
-                  <span className={getBadgeClass(entry.level)}>
-                    {entry.level === 'infierno' && '💀🔥'}
-                    {entry.level === 'llamarada' && '🔥🔥'}
-                    {entry.level === 'chispa' && '🔥'}
-                    {' '}
-                    {entry.level.toUpperCase()}
+                  <span className="text-sm font-normal text-gray-600 ml-1">
+                    DOGGY
                   </span>
                 </td>
               </tr>

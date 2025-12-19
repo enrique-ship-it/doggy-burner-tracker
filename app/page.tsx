@@ -44,45 +44,35 @@ export default function Home() {
         {/* MAIN CONTENT */}
         <main className="max-w-6xl mx-auto px-4 pb-12">
           
-          {/* HERO */}
-          <div className="text-center mb-16">
+          {/* HERO - Compacto y directo */}
+          <div className="text-center mb-12 max-h-[60vh]">
             <Image 
               src="/doggy.png" 
               alt="Doggy Bimsness" 
-              width={240} 
-              height={240}
-              className="doggy-mascot-xl mx-auto mb-6"
+              width={180} 
+              height={180}
+              className="doggy-mascot-lg mx-auto mb-4"
             />
-            <h2 className="title-meme mb-3">
+            <h2 className="title-meme text-3xl mb-2">
               <span className="fire-emoji">🔥</span> DOGGY BURN TRACKER <span className="fire-emoji">🔥</span>
             </h2>
-            <p className="subtitle-meme-enhanced mb-8">
+            <p className="subtitle-meme-enhanced text-lg mb-6">
               donde los tokens vienen a morir (profesionalmente)
             </p>
             
-            {/* CTAs Principales */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="#burn" className="btn-win98 btn-tie btn-lg">
-                🔥 Empezar a Quemar
-              </a>
-              <a href="#leaderboard" className="btn-win98 btn-navy btn-lg">
-                🏆 Ver Ranking
-              </a>
-            </div>
+            {/* CTA Principal único */}
+            <a href="#burn" className="btn-win98 btn-tie btn-xl inline-block">
+              🔥 Empezar a Quemar
+            </a>
           </div>
 
-          {/* STATS - Protagonista principal */}
-          <div className="mt-16 mb-12">
-            <BurnStats />
-          </div>
-
-          {/* CLAIM NFT - Acción especial destacada */}
-          <div id="nft" className="mt-20 mb-16">
-            <ClaimNFT />
+          {/* HOW TO BURN - Tutorial primero */}
+          <div className="spacing-lg">
+            <HowToBurn />
           </div>
 
           {/* 2 COLUMN LAYOUT: BURN & LOOKUP - Acción primaria */}
-          <div id="burn" className="mt-20 mb-16 grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div id="burn" className="spacing-xl grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* BURN INTERFACE - Ocupa 2/3 del espacio */}
             <div className="lg:col-span-2">
               <BurnInterface />
@@ -94,23 +84,28 @@ export default function Home() {
             </div>
           </div>
 
-          {/* HOW TO BURN - Tutorial */}
-          <div className="mt-16 mb-12">
-            <HowToBurn />
+          {/* STATS - Contexto del juego */}
+          <div className="spacing-lg">
+            <BurnStats />
           </div>
 
-          {/* LEADERBOARD - Contenido principal */}
-          <div id="leaderboard" className="mt-12 mb-12">
+          {/* LEADERBOARD - Competencia */}
+          <div id="leaderboard" className="spacing-lg">
             <BurnLeaderboard />
           </div>
 
-          {/* RECENT BURNS - Contenido secundario */}
-          <div className="mt-12 mb-12">
+          {/* RECENT BURNS - Actividad */}
+          <div className="spacing-md">
             <RecentBurns />
           </div>
 
-          {/* DONATE - Al final, menos prominente */}
-          <div className="mt-16 mb-8">
+          {/* CLAIM NFT - Recompensa (solo para quienes YA quemaron) */}
+          <div id="nft" className="spacing-xl">
+            <ClaimNFT />
+          </div>
+
+          {/* DONATE - Al final, opcional */}
+          <div className="spacing-lg">
             <DonateButton />
           </div>
 

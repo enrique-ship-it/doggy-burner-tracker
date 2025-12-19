@@ -1,17 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /* ===========================================
-   DOGGY BIMSNESS - Design System v4
+   DOGGY BIMSNESS - Design System v5 UX
    Estilo: Meme + Windows 98 + Burning Money
+   Mejoras: Legibilidad, Contraste, Espaciado
    =========================================== */
 
-/* --- PALETA BIMSNESS --- */
+/* --- PALETA BIMSNESS (MEJORADA) --- */
 :root {
-  /* Colores del traje */
-  --suit-navy: #1a365d;
-  --suit-navy-light: #2c5282;
-  --suit-navy-dark: #0f2342;
+  /* Colores del traje - Mayor contraste */
+  --suit-navy: #0f2342;
+  --suit-navy-light: #1a365d;
+  --suit-navy-dark: #081629;
   
   /* Colores de la corbata */
   --tie-red: #8b2942;
@@ -51,10 +52,12 @@ html, body {
 }
 
 body {
-  font-family: 'Comic Neue', cursive, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1a1a1a;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ===========================================
@@ -104,23 +107,35 @@ body {
   color: var(--suit-navy);
 }
 
-/* Subtitle mejorado - más contraste y tamaño intermedio */
+/* Subtitle mejorado - CONTRASTE WCAG AA */
 .subtitle-meme-enhanced {
   font-family: 'Comic Neue', cursive;
   font-weight: 700;
-  font-size: 1.375rem;
-  color: var(--suit-navy);
+  font-size: 1.25rem;
+  color: #0f2342;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .text-meme {
-  font-family: 'Comic Neue', cursive;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
 }
 
 .text-meme-bold {
-  font-family: 'Comic Neue', cursive;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
 }
+
+/* ===========================================
+   SISTEMA DE ESPACIADO 8PT
+   =========================================== */
+
+.spacing-xs  { margin-top: 0.5rem; margin-bottom: 0.5rem; }   /* 8px */
+.spacing-sm  { margin-top: 1rem; margin-bottom: 1rem; }       /* 16px */
+.spacing-md  { margin-top: 1.5rem; margin-bottom: 1.5rem; }   /* 24px */
+.spacing-lg  { margin-top: 2rem; margin-bottom: 2rem; }       /* 32px */
+.spacing-xl  { margin-top: 3rem; margin-bottom: 3rem; }       /* 48px */
+.spacing-2xl { margin-top: 4rem; margin-bottom: 4rem; }       /* 64px */
 
 /* Números grandes estilo "stonks" */
 .number-stonks {
@@ -385,6 +400,26 @@ body {
     inset 1px 1px 0 rgba(255,255,255,0.5);
 }
 
+.badge-chispa {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+  color: white;
+  border: 2px solid #ff6b35;
+}
+
+.badge-llamarada {
+  background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  color: white;
+  border: 2px solid #dc2626;
+}
+
+.badge-infierno {
+  background: linear-gradient(135deg, #7c2d12 0%, #9a3412 100%);
+  color: #fbbf24;
+  border: 2px solid #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+/* Legacy badges */
 .badge-bronce {
   background: linear-gradient(135deg, #cd7f32 0%, #e89545 100%);
   color: white;
@@ -536,8 +571,12 @@ body {
    =========================================== */
 
 @media (max-width: 640px) {
-  .title-meme { font-size: 1.75rem; }
+  .title-meme { font-size: 1.5rem; }
+  .subtitle-meme-enhanced { font-size: 1rem; }
   .number-stonks { font-size: 1.75rem; }
   .btn-win98 { padding: 6px 14px; font-size: 0.9rem; }
+  .btn-xl { padding: 10px 20px; font-size: 1rem; }
   .dollar-lg { font-size: 2.5rem; }
+  .spacing-xl { margin-top: 2rem; margin-bottom: 2rem; }
+  .spacing-lg { margin-top: 1.5rem; margin-bottom: 1.5rem; }
 }

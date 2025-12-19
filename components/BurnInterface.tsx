@@ -113,25 +113,46 @@ export function BurnInterface() {
         {/* Burn Form */}
         {publicKey && (
           <div className="border-t-2 border-gray-300 pt-6">
-            <label className="block text-meme mb-2">
+            {/* ADVERTENCIA CRÍTICA PRIMERO */}
+            <div className="bg-red-50 border-2 border-red-500 p-4 mb-6 rounded">
+              <p className="text-red-800 font-bold text-sm flex items-center gap-2">
+                <span className="text-2xl">⚠️</span>
+                Los tokens quemados son 100% IRRECUPERABLES
+              </p>
+              <p className="text-xs text-red-700 mt-2">
+                Verifica bien la cantidad. No hay "undo". Esta acción es permanente.
+              </p>
+            </div>
+
+            <label className="block font-bold mb-3 text-base">
               ¿Cuántos DOGGY quieres quemar?
             </label>
             
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="1000"
-              disabled={loading}
-              className="w-full px-4 py-3 border-2 border-gray-400 text-lg font-mono mb-4 focus:outline-none focus:border-blue-500 disabled:bg-gray-100"
-            />
+            <div className="relative mb-4">
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="10000"
+                min="10000"
+                disabled={loading}
+                className={`w-full px-4 py-3 border-2 text-lg font-mono transition-colors ${
+                  parseFloat(amount) >= 10000 ? 'border-green-500 bg-green-50' : 'border-gray-400'
+                } focus:outline-none focus:border-blue-500 disabled:bg-gray-100`}
+              />
+              {parseFloat(amount) > 0 && parseFloat(amount) < 10000 && (
+                <p className="text-xs text-orange-600 mt-1 font-medium">
+                  ⚠️ Mínimo 10,000 DOGGY para aparecer en leaderboard
+                </p>
+              )}
+            </div>
 
             <button
               onClick={handleBurn}
-              disabled={loading || !amount}
-              className="btn-win98 btn-tie w-full text-lg py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading || !amount || parseFloat(amount) < 10000}
+              className="btn-win98 btn-tie w-full text-lg py-4 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? '🔄 Quemando...' : '🔥 QUEMAR TOKENS'}
+              {loading ? '🔄 Quemando...' : `🔥 QUEMAR ${parseFloat(amount || '0').toLocaleString()} DOGGY`}
             </button>
 
             {/* Status Messages */}

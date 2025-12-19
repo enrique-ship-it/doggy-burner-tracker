@@ -248,43 +248,32 @@ export function ClaimNFT({ walletAddress }: ClaimNFTProps) {
           </p>
         </div>
 
-        {/* NFT PREVIEW - Grid 2 columnas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          {/* Imagen del NFT */}
-          <div className="flex flex-col items-center">
-            <div className="relative w-full max-w-xs">
-              <img 
-                src={`/nfts/${burnerInfo.level}.png`}
-                alt={`NFT ${burnerInfo.level}`}
-                className={`w-full h-auto rounded-lg border-4 ${nftInfo.borderColor} shadow-lg`}
-              />
-            </div>
-            <p className="text-center text-sm text-gray-600 mt-3 font-semibold">
-              Tu certificado nivel {burnerInfo.level?.toUpperCase() ?? 'QUEMADOR'}
-            </p>
+        {/* NFT PREVIEW - Compacto */}
+        <div className="flex flex-col md:flex-row gap-6 mb-6 items-center">
+          {/* Imagen más pequeña */}
+          <div className="w-48 h-48 flex-shrink-0">
+            <img 
+              src={`/nfts/${burnerInfo.level}.png`}
+              alt={`NFT ${burnerInfo.level}`}
+              className={`w-full h-full object-cover rounded-lg border-4 ${nftInfo.borderColor} shadow-lg`}
+            />
           </div>
 
-          {/* Info y Stats */}
-          <div className={`bg-gradient-to-br ${nftInfo.color} p-6 rounded-lg border-4 ${nftInfo.borderColor} relative overflow-hidden flex flex-col justify-center`}>
-            <div className="absolute top-0 right-0 w-20 h-20 bg-white/20 rounded-bl-full"></div>
-            
-            <div className="relative z-10">
-              <div className="text-center mb-4">
-                <div className="text-6xl mb-3 animate-pulse">{nftInfo.emoji}</div>
-                <h4 className="text-2xl font-bold mb-2 text-gray-800">{nftInfo.name}</h4>
-                <p className="text-sm text-gray-700">{nftInfo.description}</p>
-              </div>
+          {/* Info compacta al lado */}
+          <div className="flex-1">
+            <div className="text-center md:text-left">
+              <div className="text-4xl mb-2">{nftInfo.emoji}</div>
+              <h4 className="text-xl font-bold mb-1 text-gray-800">{nftInfo.name}</h4>
+              <p className="text-sm text-gray-600 mb-4">{nftInfo.description}</p>
               
-              <div className="mt-4 pt-4 border-t-2 border-black/10">
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="bg-white/50 rounded p-3">
-                    <p className="text-xs text-gray-600 mb-1">Total Quemado</p>
-                    <p className="font-bold text-gray-800 text-base">{formatNumber(burnerInfo.totalBurned)} DOGGY</p>
-                  </div>
-                  <div className="bg-white/50 rounded p-3">
-                    <p className="text-xs text-gray-600 mb-1">Ranking</p>
-                    <p className="font-bold text-gray-800 text-base">#{burnerInfo.rank}</p>
-                  </div>
+              <div className="flex gap-3 justify-center md:justify-start">
+                <div className="bg-gray-100 rounded px-3 py-2">
+                  <p className="text-xs text-gray-600">Quemado</p>
+                  <p className="font-bold text-base">{formatNumber(burnerInfo.totalBurned)}</p>
+                </div>
+                <div className="bg-gray-100 rounded px-3 py-2">
+                  <p className="text-xs text-gray-600">Rank</p>
+                  <p className="font-bold text-base">#{burnerInfo.rank}</p>
                 </div>
               </div>
             </div>
