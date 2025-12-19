@@ -15,34 +15,9 @@ export default function Home() {
   return (
     <div className="bg-burning-money">
       <div className="bg-overlay">
-        
-        {/* HEADER */}
-        <header className="header-bimsness -mx-0 px-6 py-5 mb-8 sticky top-0 z-50 shadow-lg">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Image 
-                src="/doggy.png" 
-                alt="Doggy" 
-                width={64} 
-                height={64}
-                className="doggy-mascot-sm"
-              />
-              <div>
-                <h1 className="text-2xl text-white font-bold">
-                  <span className="dollar-sign dollar-md mr-1">$</span>
-                  DOGGY BIMSNESS
-                </h1>
-                <p className="text-sm text-white/90 font-semibold">Burn Tracker Oficial</p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <WalletMultiButton className="btn-win98 btn-navy btn-sm" />
-            </div>
-          </div>
-        </header>
 
         {/* MAIN CONTENT */}
-        <main className="max-w-6xl mx-auto px-4 pb-12">
+        <main className="max-w-6xl mx-auto px-4 py-12">
           
           {/* HERO - Explicación clara del propósito */}
           <div className="text-center mb-12 max-h-[60vh]">
