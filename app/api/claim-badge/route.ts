@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
-import { saveBadgeClaim } from '@/lib/sheets';
+import { saveBadgeClaim } from '@/lib/supabase';
 import { getServerConnection } from '@/lib/server-connection';
 import { scanBurns, calculateLeaderboard } from '@/lib/scanner';
 

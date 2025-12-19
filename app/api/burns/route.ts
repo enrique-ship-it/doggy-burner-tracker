@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server';
 import { scanBurns, scanBurnsFallback, calculateLeaderboard, calculateGlobalStats } from '@/lib/scanner';
 import { getServerConnection } from '@/lib/server-connection';
-import { getAllBadgeHolders } from '@/lib/sheets';
+import { getAllBadgeHolders } from '@/lib/supabase';
 import { ApiResponse } from '@/lib/types';
 
 // Cache de 30 segundos
