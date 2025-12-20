@@ -226,13 +226,16 @@ export function WalletLookup() {
                     </ul>
                   </div>
                   
-                  <h4 className="text-meme-bold text-lg mb-3 text-center">
-                    �️ Reclamar Badge Conmemorativo
+                  <h4 className="text-meme-bold text-lg mb-2 text-center">
+                    🎖️ Reclamar Badge Conmemorativo
                   </h4>
                   
-                  <p className="text-sm text-center mb-4">
-                    Calificas para un badge de nivel <strong className={getLevelBadgeClass(stats.level)}>{stats.level.toUpperCase()}</strong>
-                  </p>
+                  <div className="text-center mb-4">
+                    <p className="text-sm text-gray-600 mb-2">Calificas para un badge de nivel</p>
+                    <span className={getLevelBadgeClass(stats.level) + " text-lg"}>
+                      {getLevelEmoji(stats.level)} {stats.level.toUpperCase()}
+                    </span>
+                  </div>
                   
                   {claimStatus === 'idle' && (
                     <div>
