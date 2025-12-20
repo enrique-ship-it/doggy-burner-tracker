@@ -259,20 +259,27 @@ export function WalletLookup() {
                   )}
                   
                   {claimStatus === 'success' && (
-                    <div className="security-badge-hero">
-                      <p className="text-dollar-green font-bold mb-2 text-lg">✅ ¡Medalla Reclamada!</p>
-                      <p className="text-sm text-dollar-green mb-4">{claimMessage}</p>
-                      <div className="benefit-card p-4">
-                        <p className="text-sm text-gray-700 mb-2">
-                          <strong>✓ Wallet identificada</strong>
-                        </p>
-                        <p className="text-xs text-gray-600">
-                          Tu wallet está registrada en el sistema. Espera recompensas y beneficios futuros.
+                    <div className="text-center py-6">
+                      <div className="mb-4">
+                        <img 
+                          src={`/nfts/${stats.level}.png`}
+                          alt={`Medalla ${stats.level}`}
+                          className="w-48 h-48 mx-auto rounded-lg shadow-2xl"
+                        />
+                      </div>
+                      <h3 className="text-3xl font-bold text-dollar-green mb-2">
+                        The Doggy Burner {stats.level === 'oro' ? 'ORO' : stats.level === 'plata' ? 'PLATA' : 'BRONCE'}
+                      </h3>
+                      <p className="text-meme text-gray-600 mb-4 text-lg">
+                        {formatNumber(stats.totalBurned)} DOGGY quemados
+                      </p>
+                      
+                      <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-2 border-orange-300 max-w-md mx-auto">
+                        <p className="text-meme-bold text-orange-800 mb-2 text-lg">Wallet identificada ✓</p>
+                        <p className="text-base text-gray-700">
+                          Espera recompensas y beneficios futuros
                         </p>
                       </div>
-                      <p className="text-xs text-gray-600 mt-4 text-center text-meme">
-                        No es necesario hacer nada más 🎨
-                      </p>
                     </div>
                   )}
                   
