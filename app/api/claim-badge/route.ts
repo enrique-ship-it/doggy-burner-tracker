@@ -81,10 +81,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Responder al usuario INMEDIATAMENTE con éxito
-    // (El badge está reclamado si llegamos hasta aquí)
+    // Guardar en Supabase ANTES de responder
     const claimTime = new Date().toISOString();
     
+    console.log('[Claim Badge] Saving badge to Supabase for:', wallet);
+    const saved = await saveBadgeClaim({
+      wallet: wallet,
+      level: burner.level,
+      totalBurned: burner.totalBurned,
+      signature: signatureHex,
+      claimedAt: claimTime,
+    });
+
+    if (!saved) {
+      console.error('[Claim Badge] Failed to save to Supabase, but badge is claimed');
+    }
+
     const response = {
       success: true,
       badge: {
@@ -94,20 +106,6 @@ export async function POST(req: NextRequest) {
         claimedAt: claimTime,
       },
     };
-
-    // Guardar en Google Sheets en background (sin bloquear)
-    // Si falla, no afecta al usuario
-    console.log('[Claim Badge] Saving badge to Sheets in background for:', wallet);
-    saveBadgeClaim({
-      wallet: wallet,
-      level: burner.level,
-      totalBurned: burner.totalBurned,
-      signature: signatureHex,
-      claimedAt: claimTime,
-    }).catch((error) => {
-      console.error('[Claim Badge] Background save failed:', error);
-      // Error no afecta al usuario
-    });
 
     return NextResponse.json(response);
 
