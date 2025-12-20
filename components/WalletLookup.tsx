@@ -15,7 +15,6 @@ export function WalletLookup() {
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<WalletStats | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [email, setEmail] = useState('');
   const [claimStatus, setClaimStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [claimMessage, setClaimMessage] = useState('');
 
@@ -88,9 +87,7 @@ export function WalletLookup() {
     }
   };
 
-  const handleClaimNFT = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const handleClaimNFT = async () => {
     if (!stats) return;
     
     setClaimStatus('loading');
@@ -102,7 +99,6 @@ export function WalletLookup() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           wallet: stats.address,
-          email: email.trim() || null,
           level: stats.level,
           totalBurned: stats.totalBurned,
         }),
@@ -112,8 +108,7 @@ export function WalletLookup() {
       
       if (response.ok) {
         setClaimStatus('success');
-        setClaimMessage('¡Solicitud recibida! Tu NFT será enviado en 24-48 horas.');
-        setEmail('');
+        setClaimMessage('¡Medalla reclamada! Ya está identificada tu wallet.');
       } else {
         setClaimStatus('error');
         setClaimMessage(data.error || 'Error al procesar solicitud');
@@ -220,11 +215,11 @@ export function WalletLookup() {
               {stats.totalBurned >= 10000 && (
                 <div className="mt-6 pt-6 border-t-2 border-gray-300">
                   {/* SEGURIDAD DESTACADA */}
-                  <div className="bg-green-50 border-2 border-green-500 p-4 rounded mb-4">
-                    <p className="text-sm font-bold text-green-800 mb-2">
+                  <div className="security-badge-hero mb-4">
+                    <p className="text-sm font-bold text-dollar-green mb-2">
                       🔒 <strong>100% SEGURO</strong>
                     </p>
-                    <ul className="text-xs text-green-700 space-y-1">
+                    <ul className="text-xs text-dollar-green space-y-1">
                       <li>✅ <strong>Solo lectura</strong> - Verificamos datos públicos</li>
                       <li>✅ <strong>Sin fees</strong> - Medalla gratis</li>
                       <li>✅ <strong>Sin transacciones</strong> - Solo firma mensaje</li>
@@ -240,60 +235,43 @@ export function WalletLookup() {
                   </p>
                   
                   {claimStatus === 'idle' && (
-                    <form onSubmit={handleClaimNFT}>
-                      <div className="mb-3">
-                        <label className="block text-sm font-medium mb-2">
-                          Email (opcional - para notificación)
-                        </label>
-                        <input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="tu@email.com"
-                          className="w-full px-4 py-2 border-2 border-gray-400 focus:outline-none focus:border-blue-500"
-                        />
-                        <p className="text-xs text-gray-500 mt-1">
-                          Opcional. Solo para notificaciones futuras.
-                        </p>
-                      </div>
-                      
+                    <div>
                       <button
-                        type="submit"
-                        className="btn-win98 btn-tie w-full text-lg py-3"
+                        onClick={handleClaimNFT}
+                        className="btn-claim-mega w-full"
                       >
-                        �️ Solicitar Mi Badge
+                        🎖️ SÍ, QUIERO MI MEDALLA
                       </button>
                       
-                      <p className="text-xs text-center text-gray-600 mt-3 text-meme">
-                        Tu badge será procesado en 24-48 horas después de verificar tus burns on-chain
-                      </p>
-                    </form>
+                      <div className="trust-signals mt-4">
+                        <span>✓ 100% seguro</span>
+                        <span>✓ Gratis para siempre</span>
+                        <span>✓ Sin transacciones</span>
+                      </div>
+                    </div>
                   )}
                   
                   {claimStatus === 'loading' && (
                     <div className="text-center py-6">
-                      <p className="text-meme text-lg mb-2">🔄 Procesando...</p>
-                      <p className="text-sm text-gray-600">Guardando tu solicitud</p>
+                      <p className="text-meme text-lg mb-2">⏳ Procesando...</p>
+                      <p className="text-sm text-gray-600">Registrando tu medalla</p>
                     </div>
                   )}
                   
                   {claimStatus === 'success' && (
-                    <div className="bg-green-50 border-2 border-green-500 p-4 rounded">
-                      <p className="text-green-800 font-bold mb-2">✅ ¡Solicitud Recibida!</p>
-                      <p className="text-sm text-green-700 mb-3">{claimMessage}</p>
-                      <div className="bg-white p-3 rounded border border-green-300">
-                        <p className="text-xs text-gray-700 mb-2">
-                          <strong>Próximos pasos:</strong>
+                    <div className="security-badge-hero">
+                      <p className="text-dollar-green font-bold mb-2 text-lg">✅ ¡Medalla Reclamada!</p>
+                      <p className="text-sm text-dollar-green mb-4">{claimMessage}</p>
+                      <div className="benefit-card p-4">
+                        <p className="text-sm text-gray-700 mb-2">
+                          <strong>✓ Wallet identificada</strong>
                         </p>
-                        <ol className="text-xs text-gray-600 space-y-1 list-decimal list-inside">
-                          <li>Verificaremos tus burns on-chain (automático)</li>
-                          <li>Mintearemos tu NFT con tus datos</li>
-                          <li>Lo enviaremos a tu wallet en 24-48h</li>
-                          <li>Recibirás email si lo proporcionaste</li>
-                        </ol>
+                        <p className="text-xs text-gray-600">
+                          Tu wallet está registrada en el sistema. Espera recompensas y beneficios futuros.
+                        </p>
                       </div>
-                      <p className="text-xs text-gray-500 mt-3 text-center">
-                        No es necesario hacer nada más. Solo espera 🎨
+                      <p className="text-xs text-gray-600 mt-4 text-center text-meme">
+                        No es necesario hacer nada más 🎨
                       </p>
                     </div>
                   )}
