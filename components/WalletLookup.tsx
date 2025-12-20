@@ -263,7 +263,10 @@ export function WalletLookup() {
                   
                   {claimStatus === 'success' && (
                     <div className="text-center py-6">
-                      <div className="mb-4">
+                      <div className="mb-6">
+                        <div className="animate-bounce mb-4">
+                          <span className="text-6xl">🎉</span>
+                        </div>
                         <img 
                           src={`/nfts/${stats.level}.png`}
                           alt={`Medalla ${stats.level}`}
@@ -271,17 +274,29 @@ export function WalletLookup() {
                         />
                       </div>
                       <h3 className="text-3xl font-bold text-dollar-green mb-2">
-                        The Doggy Burner {stats.level === 'oro' ? 'ORO' : stats.level === 'plata' ? 'PLATA' : 'BRONCE'}
+                        ¡BIENVENIDO AL CLUB!
                       </h3>
+                      <h4 className="text-2xl font-bold text-suit-navy mb-3">
+                        The Doggy Burner {stats.level === 'oro' ? 'ORO' : stats.level === 'plata' ? 'PLATA' : 'BRONCE'}
+                      </h4>
                       <p className="text-meme text-gray-600 mb-4 text-lg">
-                        {formatNumber(stats.totalBurned)} DOGGY quemados
+                        {formatNumber(stats.totalBurned)} DOGGY quemados • {new Date().toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City', day: '2-digit', month: '2-digit', year: 'numeric' })}
                       </p>
                       
                       <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-2 border-orange-300 max-w-md mx-auto">
-                        <p className="text-meme-bold text-orange-800 mb-2 text-lg">Wallet identificada ✓</p>
-                        <p className="text-base text-gray-700">
-                          Espera recompensas y beneficios futuros
+                        <p className="text-meme-bold text-orange-800 mb-3 text-xl">🔥 Eres Oficialmente un Quemador 🔥</p>
+                        <p className="text-base text-gray-700 mb-2">
+                          Tu wallet está identificada en el sistema
                         </p>
+                        <p className="text-sm text-gray-600">
+                          Mantén tus ojos abiertos para recompensas exclusivas, airdrops, y beneficios VIP
+                        </p>
+                      </div>
+                      
+                      <div className="mt-4 flex justify-center gap-4 text-2xl">
+                        <span>💎</span>
+                        <span>🚀</span>
+                        <span>💰</span>
                       </div>
                     </div>
                   )}
