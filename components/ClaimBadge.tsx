@@ -142,7 +142,7 @@ export function ClaimBadge() {
                 The Doggy Burner {badge?.level === 'oro' ? 'ORO' : badge?.level === 'plata' ? 'PLATA' : 'BRONCE'}
               </h3>
               <p className="text-meme text-gray-600 mb-4 text-lg">
-                {badge?.totalBurned.toLocaleString()} DOGGY quemados • {new Date(badge?.claimedAt).toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City', year: 'numeric', month: 'long', day: 'numeric' })}
+                {badge?.totalBurned.toLocaleString()} DOGGY quemados • {new Date(badge?.claimedAt).toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City', day: '2-digit', month: '2-digit', year: 'numeric' })}
               </p>
               
               <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-2 border-orange-300 max-w-md mx-auto">
