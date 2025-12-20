@@ -194,7 +194,7 @@ export function WalletLookup() {
                       🔐 Para reclamar tu badge:
                     </p>
                     <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
-                      <li>Conecta esta wallet usando el botón arriba</li>
+                      <li>Conecta esta wallet usando el botón de abajo</li>
                       <li>Ve a la sección "Consigue tu Medalla"</li>
                       <li>Firma el mensaje de verificación</li>
                       <li>Recibe tu badge instantáneamente</li>
