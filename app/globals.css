@@ -1235,6 +1235,84 @@ body {
 }
 
 /* ===========================================
+   FOOTER ENHANCED
+   =========================================== */
+
+.footer-enhanced {
+  background: linear-gradient(135deg, var(--suit-navy) 0%, var(--suit-navy-dark) 100%);
+  border-top: 4px solid var(--gold);
+  padding: 48px 24px 32px 24px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-disclaimer {
+  font-family: 'Comic Neue', cursive;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.footer-brand {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-transform: lowercase;
+}
+
+.footer-links {
+  font-size: 0.875rem;
+  margin-top: 16px;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+  padding: 4px 8px;
+}
+
+.footer-link:hover {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0 8px;
+}
+
+@media (max-width: 640px) {
+  .footer-enhanced {
+    padding: 32px 16px 24px 16px;
+    margin-top: 60px;
+  }
+  
+  .footer-disclaimer {
+    font-size: 0.75rem;
+  }
+  
+  .footer-brand {
+    font-size: 1rem;
+  }
+  
+  .footer-links {
+    font-size: 0.75rem;
+  }
+}
+
+/* ===========================================
    RESPONSIVE
    =========================================== */
 

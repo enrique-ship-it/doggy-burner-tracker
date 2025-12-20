@@ -146,18 +146,24 @@ export default function Home() {
         </main>
 
         {/* FOOTER */}
-        <footer className="disclaimer-footer">
-          <p>no es consejo financiero • probablemente nada • haz tu propia investigación</p>
-          <p className="mt-1">doggy bimsness club © 2024</p>
-          <p className="text-xs mt-2">
-            <a href="https://solscan.io" target="_blank" rel="noopener" className="hover:underline">
-              Ver en Solscan
-            </a>
-            {' • '}
-            <a href="/api/burns" target="_blank" className="hover:underline">
-              API
-            </a>
-          </p>
+        <footer className="footer-enhanced">
+          <div className="footer-content">
+            <p className="footer-disclaimer">
+              no es consejo financiero • probablemente nada • haz tu propia investigación
+            </p>
+            <p className="footer-brand">
+              checoin.sol © 2025
+            </p>
+            <p className="footer-links">
+              <a href="https://solscan.io" target="_blank" rel="noopener" className="footer-link">
+                Ver en Solscan
+              </a>
+              <span className="footer-separator">•</span>
+              <a href="/api/burns" target="_blank" className="footer-link">
+                API
+              </a>
+            </p>
+          </div>
         </footer>
 
       </div>
