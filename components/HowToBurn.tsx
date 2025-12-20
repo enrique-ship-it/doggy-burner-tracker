@@ -18,8 +18,8 @@ export function HowToBurn() {
 
   return (
     <div className="how-to-section">
-      <div className="window-titlebar" style={{background: 'linear-gradient(90deg, var(--fire) 0%, #ff8c42 100%)', marginBottom: '24px', borderRadius: '8px 8px 0 0'}}>
-        <span style={{color: 'white'}}>🔥 CÓMO COMPETIR</span>
+      <div className="window-titlebar" style={{background: 'linear-gradient(90deg, #ff6b35 0%, #ff8c42 100%)', marginBottom: '24px', borderRadius: '8px 8px 0 0'}}>
+        <span style={{color: 'white', fontWeight: 700}}>🔥 CÓMO COMPETIR</span>
         <span style={{color: 'white'}}>—  ▢  ✕</span>
       </div>
       

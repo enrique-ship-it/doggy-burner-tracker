@@ -789,8 +789,8 @@ body {
 
 .claim-subtitle {
   font-size: 1.5rem;
-  color: var(--fire);
-  background: linear-gradient(90deg, var(--fire) 0%, #ff8c42 100%);
+  color: var(--fire-orange);
+  background: linear-gradient(90deg, var(--fire-orange) 0%, #ff8c42 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -936,13 +936,13 @@ body {
 }
 
 .step-card {
-  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-  border: 3px solid var(--suit-navy);
-  border-radius: 12px;
-  padding: 32px 24px;
+  background: white;
+  border: 4px solid var(--suit-navy);
+  border-radius: 16px;
+  padding: 48px 24px 32px 24px;
   text-align: center;
   position: relative;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.15);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -953,22 +953,23 @@ body {
 
 .step-number {
   position: absolute;
-  top: -16px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 48px;
-  height: 48px;
-  background: var(--fire);
-  border: 3px solid var(--suit-navy);
+  width: 52px;
+  height: 52px;
+  background: var(--fire-orange);
+  border: 4px solid var(--suit-navy);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Comic Neue', cursive;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: white;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
 .step-icon {
@@ -992,7 +993,7 @@ body {
 
 .burn-address-mega {
   background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
-  border: 4px solid var(--fire);
+  border: 4px solid var(--fire-orange);
   border-radius: 12px;
   padding: 32px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.1);
@@ -1007,7 +1008,7 @@ body {
 
 .btn-copy-mega {
   width: 100%;
-  background: var(--fire);
+  background: var(--fire-orange);
   color: white;
   border: 3px solid var(--suit-navy);
   padding: 16px 32px;
@@ -1037,7 +1038,7 @@ body {
 }
 
 .verify-link {
-  color: var(--fire);
+  color: var(--fire-orange);
   font-family: 'Comic Neue', cursive;
   font-weight: 600;
   text-decoration: none;
@@ -1113,7 +1114,7 @@ body {
   position: absolute;
   top: -12px;
   right: -12px;
-  background: var(--fire);
+  background: var(--fire-orange);
   color: white;
   font-size: 0.625rem;
   padding: 4px 8px;
@@ -1193,6 +1194,10 @@ body {
   
   .steps-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .step-card {
+    padding: 44px 20px 28px 20px;
   }
   
   .tiers-grid {
