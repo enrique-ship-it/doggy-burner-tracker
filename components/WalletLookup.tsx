@@ -15,8 +15,6 @@ export function WalletLookup() {
   const [loading, setLoading] = useState(false);
   const [stats, setStats] = useState<WalletStats | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [claimStatus, setClaimStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [claimMessage, setClaimMessage] = useState('');
 
   const handleLookup = async () => {
     if (!address.trim()) {
@@ -84,38 +82,6 @@ export function WalletLookup() {
       case 'llamarada': return '🔥🔥';
       case 'chispa': return '🔥';
       default: return '🔥';
-    }
-  };
-
-  const handleClaimNFT = async () => {
-    if (!stats) return;
-    
-    setClaimStatus('loading');
-    setClaimMessage('');
-    
-    try {
-      const response = await fetch('/api/claim-nft', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          wallet: stats.address,
-          level: stats.level,
-          totalBurned: stats.totalBurned,
-        }),
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        setClaimStatus('success');
-        setClaimMessage('¡Medalla reclamada! Ya está identificada tu wallet.');
-      } else {
-        setClaimStatus('error');
-        setClaimMessage(data.error || 'Error al procesar solicitud');
-      }
-    } catch (err) {
-      setClaimStatus('error');
-      setClaimMessage('Error de conexión. Intenta de nuevo.');
     }
   };
 
@@ -211,108 +177,32 @@ export function WalletLookup() {
                 💡 Datos públicos de blockchain
               </p>
               
-              {/* CLAIM NFT SECTION - Solo si califica */}
+              {/* MENSAJE PARA RECLAMAR - Redirigir a ClaimBadge */}
               {stats.totalBurned >= 10000 && (
                 <div className="mt-6 pt-6 border-t-2 border-gray-300">
-                  {/* SEGURIDAD DESTACADA */}
                   <div className="security-badge-hero mb-4">
                     <p className="text-sm font-bold text-dollar-green mb-2">
-                      🔒 <strong>100% SEGURO</strong>
+                      🎖️ <strong>¡CALIFICAS PARA UN BADGE!</strong>
                     </p>
-                    <ul className="text-xs text-dollar-green space-y-1">
-                      <li>✅ <strong>Solo lectura</strong> - Verificamos datos públicos</li>
-                      <li>✅ <strong>Sin fees</strong> - Medalla gratis</li>
-                      <li>✅ <strong>Sin transacciones</strong> - Solo firma mensaje</li>
-                    </ul>
+                    <p className="text-sm text-dollar-green mb-3">
+                      Esta wallet califica para badge de nivel <strong>{stats.level.toUpperCase()}</strong>
+                    </p>
                   </div>
                   
-                  <h4 className="text-meme-bold text-lg mb-2 text-center">
-                    🎖️ Reclamar Badge Conmemorativo
-                  </h4>
-                  
-                  <div className="text-center mb-4">
-                    <p className="text-sm text-gray-600 mb-2">Calificas para un badge de nivel</p>
-                    <span className={getLevelBadgeClass(stats.level) + " text-lg"}>
-                      {getLevelEmoji(stats.level)} {stats.level.toUpperCase()}
-                    </span>
+                  <div className="benefit-card p-4">
+                    <p className="text-sm text-gray-700 mb-3 font-bold">
+                      🔐 Para reclamar tu badge:
+                    </p>
+                    <ol className="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+                      <li>Conecta esta wallet usando el botón arriba</li>
+                      <li>Ve a la sección "Consigue tu Medalla"</li>
+                      <li>Firma el mensaje de verificación</li>
+                      <li>Recibe tu badge instantáneamente</li>
+                    </ol>
+                    <p className="text-xs text-gray-500 mt-3">
+                      ⚠️ Solo el dueño de la wallet puede reclamar el badge (requiere firma)
+                    </p>
                   </div>
-                  
-                  {claimStatus === 'idle' && (
-                    <div>
-                      <button
-                        onClick={handleClaimNFT}
-                        className="btn-claim-mega w-full"
-                      >
-                        🎖️ SÍ, QUIERO MI MEDALLA
-                      </button>
-                      
-                      <div className="trust-signals mt-4">
-                        <span>✓ 100% seguro</span>
-                        <span>✓ Gratis para siempre</span>
-                        <span>✓ Sin transacciones</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {claimStatus === 'loading' && (
-                    <div className="text-center py-6">
-                      <p className="text-meme text-lg mb-2">⏳ Procesando...</p>
-                      <p className="text-sm text-gray-600">Registrando tu medalla</p>
-                    </div>
-                  )}
-                  
-                  {claimStatus === 'success' && (
-                    <div className="text-center py-6">
-                      <div className="mb-6">
-                        <div className="animate-bounce mb-4">
-                          <span className="text-6xl">🎉</span>
-                        </div>
-                        <img 
-                          src={`/nfts/${stats.level}.png`}
-                          alt={`Medalla ${stats.level}`}
-                          className="w-48 h-48 mx-auto rounded-lg shadow-2xl"
-                        />
-                      </div>
-                      <h3 className="text-3xl font-bold text-dollar-green mb-2">
-                        ¡BIENVENIDO AL CLUB!
-                      </h3>
-                      <h4 className="text-2xl font-bold text-suit-navy mb-3">
-                        The Doggy Burner {stats.level === 'oro' ? 'ORO' : stats.level === 'plata' ? 'PLATA' : 'BRONCE'}
-                      </h4>
-                      <p className="text-meme text-gray-600 mb-4 text-lg">
-                        {formatNumber(stats.totalBurned)} DOGGY quemados • {new Date().toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City', day: '2-digit', month: '2-digit', year: 'numeric' })}
-                      </p>
-                      
-                      <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-2 border-orange-300 max-w-md mx-auto">
-                        <p className="text-meme-bold text-orange-800 mb-3 text-xl">🔥 Eres Oficialmente un Quemador 🔥</p>
-                        <p className="text-base text-gray-700 mb-2">
-                          Tu wallet está identificada en el sistema
-                        </p>
-                        <p className="text-sm text-gray-600">
-                          Mantén tus ojos abiertos para recompensas exclusivas, airdrops, y beneficios VIP
-                        </p>
-                      </div>
-                      
-                      <div className="mt-4 flex justify-center gap-4 text-2xl">
-                        <span>💎</span>
-                        <span>🚀</span>
-                        <span>💰</span>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {claimStatus === 'error' && (
-                    <div className="bg-red-50 border-2 border-red-500 p-4 rounded">
-                      <p className="text-red-800 font-bold mb-2">❌ Error</p>
-                      <p className="text-sm text-red-700 mb-3">{claimMessage}</p>
-                      <button
-                        onClick={() => setClaimStatus('idle')}
-                        className="btn-win98 btn-navy w-full"
-                      >
-                        Intentar de Nuevo
-                      </button>
-                    </div>
-                  )}
                 </div>
               )}
             </div>
