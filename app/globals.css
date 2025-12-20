@@ -554,20 +554,41 @@ body {
    NUEVOS COMPONENTES UX MEJORADO
    =========================================== */
 
-/* Benefit Cards */
+/* Benefit Cards - Estilo Windows 98 */
 .benefit-card {
-  background: white;
-  border: 3px solid var(--suit-navy);
+  background: linear-gradient(135deg, #f0f0f0 0%, #d4d4d4 100%);
+  border-top: 2px solid #ffffff;
+  border-left: 2px solid #ffffff;
+  border-right: 2px solid #808080;
+  border-bottom: 2px solid #808080;
   padding: 24px;
   text-align: center;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-  border-radius: 8px;
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
+  border-radius: 0;
+  position: relative;
 }
 
 .benefit-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+  box-shadow: 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.2),
+    3px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+.benefit-card::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  pointer-events: none;
 }
 
 .benefit-title {
@@ -585,13 +606,31 @@ body {
   margin: 0;
 }
 
-/* Security Badge Hero */
+/* Security Badge Hero - Estilo Windows 98 */
 .security-badge-hero {
-  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-  border: 3px solid #28a745;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-top: 3px solid #ffffff;
+  border-left: 3px solid #ffffff;
+  border-right: 3px solid #2e7d32;
+  border-bottom: 3px solid #2e7d32;
+  border-radius: 0;
   padding: 24px;
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  box-shadow: 
+    inset 2px 2px 0 rgba(255, 255, 255, 0.6),
+    inset -2px -2px 0 rgba(46, 125, 50, 0.3),
+    4px 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.security-badge-hero::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(46, 125, 50, 0.2);
+  pointer-events: none;
 }
 
 .security-title {
