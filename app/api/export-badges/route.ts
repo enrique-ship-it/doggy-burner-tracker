@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllBadgeHolders } from '@/lib/sheets';
+import { getAllBadgeHolders } from '@/lib/supabase';
 
 // API Key simple para proteger endpoint
 const API_KEY = process.env.EXPORT_API_KEY || 'changeme';
