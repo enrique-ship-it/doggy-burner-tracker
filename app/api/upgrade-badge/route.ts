@@ -2,16 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
-import bs58 from 'bs58';
 import { calculateCurrentTier } from '@/lib/badge-tier';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!
-);
 
 export async function POST(req: NextRequest) {
   try {
+    // Crear cliente Supabase dentro de la función para evitar errores en build-time
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_KEY;
+
+    if (!supabaseUrl || !supabaseKey) {
+      return NextResponse.json(
+        { error: 'Missing Supabase configuration' },
+        { status: 500 }
+      );
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
     const { wallet, signature } = await req.json();
 
     if (!wallet || !signature) {
