@@ -4,6 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useState, useEffect } from 'react';
 import nacl from 'tweetnacl';
+import { checkUpgradeEligibility, getTierDisplayName, type BadgeLevel } from '@/lib/badge-tier';
 
 const SIGN_MESSAGE = 'I claim my DOGGY Burner Badge';
 
@@ -15,6 +16,8 @@ export function ClaimBadge() {
   const [badge, setBadge] = useState<any>(null);
   const [hasBadge, setHasBadge] = useState(false);
   const [checkingBadge, setCheckingBadge] = useState(false);
+  const [upgradeInfo, setUpgradeInfo] = useState<{ canUpgrade: boolean; newTier?: BadgeLevel } | null>(null);
+  const [upgradingBadge, setUpgradingBadge] = useState(false);
 
   // Verificar si ya tiene badge
   useEffect(() => {
@@ -32,8 +35,17 @@ export function ClaimBadge() {
         if (data.hasBadge) {
           setHasBadge(true);
           setBadge(data.badge);
+          
+          // Verificar si califica para upgrade
+          const burnsRes = await fetch(`/api/burns?wallet=${publicKey.toString()}`);
+          const burnsData = await burnsRes.json();
+          const currentBurns = burnsData.totalBurned || 0;
+          
+          const upgrade = checkUpgradeEligibility(data.badge.level, currentBurns);
+          setUpgradeInfo(upgrade);
         } else {
           setHasBadge(false);
+          setUpgradeInfo(null);
         }
       } catch (err) {
         console.error('Error checking badge:', err);
@@ -85,6 +97,48 @@ export function ClaimBadge() {
       setError(err.message || 'Error desconocido');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleUpgradeBadge = async () => {
+    if (!publicKey || !signMessage || !upgradeInfo?.canUpgrade) {
+      return;
+    }
+
+    setUpgradingBadge(true);
+    setError(null);
+
+    try {
+      // Firmar mensaje de upgrade
+      const upgradeMessage = `I upgrade my DOGGY Burner Badge to ${upgradeInfo.newTier}`;
+      const messageBytes = new TextEncoder().encode(upgradeMessage);
+      const signatureBytes = await signMessage(messageBytes);
+      const signatureHex = Buffer.from(signatureBytes).toString('hex');
+
+      // Enviar a API de upgrade
+      const res = await fetch('/api/upgrade-badge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          wallet: publicKey.toString(),
+          signature: signatureHex,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Error al actualizar badge');
+      }
+
+      // Actualizar badge en UI
+      setBadge(data.badge);
+      setUpgradeInfo(null); // Ya no necesita upgrade
+
+    } catch (err: any) {
+      setError(err.message || 'Error desconocido al actualizar');
+    } finally {
+      setUpgradingBadge(false);
     }
   };
 
@@ -150,6 +204,29 @@ export function ClaimBadge() {
               <p className="text-meme text-gray-600 mb-4 text-lg">
                 {badge?.totalBurned.toLocaleString()} DOGGY quemados • {new Date(badge?.claimedAt).toLocaleDateString('es-MX', { timeZone: 'America/Mexico_City', day: '2-digit', month: '2-digit', year: 'numeric' })}
               </p>
+              
+              {/* Mensaje de upgrade disponible */}
+              {upgradeInfo?.canUpgrade && upgradeInfo.newTier && (
+                <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-2 border-green-400 max-w-md mx-auto">
+                  <div className="animate-bounce mb-3">
+                    <span className="text-5xl">🎉</span>
+                  </div>
+                  <p className="text-meme-bold text-green-800 mb-3 text-xl">
+                    ¡Ahora calificas para {getTierDisplayName(upgradeInfo.newTier)}!
+                  </p>
+                  <p className="text-base text-gray-700 mb-4">
+                    Has quemado suficientes tokens para subir de nivel
+                  </p>
+                  <button
+                    onClick={handleUpgradeBadge}
+                    disabled={upgradingBadge}
+                    className="btn-claim-mega"
+                    style={{ fontSize: '1rem', padding: '12px 24px' }}
+                  >
+                    {upgradingBadge ? '⏳ Actualizando...' : `🚀 ACTUALIZAR A ${getTierDisplayName(upgradeInfo.newTier)}`}
+                  </button>
+                </div>
+              )}
               
               <div className="mt-6 p-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-2 border-orange-300 max-w-md mx-auto">
                 <p className="text-meme-bold text-orange-800 mb-3 text-xl">🔥 Eres Oficialmente un Quemador 🔥</p>
