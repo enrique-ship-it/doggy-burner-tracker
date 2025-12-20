@@ -32,7 +32,8 @@ jobs:
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
           HELIUS_API_KEY: ${{ secrets.HELIUS_API_KEY }}
           MINT_WALLET_PRIVATE_KEY: ${{ secrets.MINT_WALLET_PRIVATE_KEY }}
-        run: node scripts/process-nft-claims.js
+          NODE_ENV: production
+        run: node scripts/process-nft-claims.mjs
       
       - name: Upload logs (on failure)
         if: failure()
