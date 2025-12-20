@@ -16,17 +16,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DOGGY Burner Tracker - Quema tus tokens profesionalmente",
-  description: "Track y quema tokens DOGGY. Leaderboard de DoggyQuemadores.",
+  title: "DOGGY Burner Tracker - El Ranking de los que se Atreven",
+  description: "Compite quemando DOGGY. Gana tu badge conmemorativo. El leaderboard oficial de quemadores.",
   icons: {
-    icon: '/doggy.png',
-    shortcut: '/doggy.png',
-    apple: '/doggy.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
   openGraph: {
-    title: "DOGGY Burner Tracker",
-    description: "Compite en el leaderboard quemando DOGGY tokens",
-    url: "https://burner.chebtc.com",
+    title: "DOGGY Burner Tracker - El Ranking de los que se Atreven",
+    description: "Compite quemando DOGGY. Gana tu badge conmemorativo. ¿Tienes lo que se necesita?",
+    url: "https://doggyburner.chebtc.com",
     siteName: "DOGGY Burner Tracker",
     images: [
       {
