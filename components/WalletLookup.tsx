@@ -127,15 +127,15 @@ export function WalletLookup() {
   return (
     <div className="window-98 max-w-2xl mx-auto">
       <div className="window-titlebar">
-        <span>🔍 buscar.exe - Ver stats públicas</span>
+        <span>🔍 Busca tu Posición</span>
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content">
         
         <p className="text-meme mb-4 text-center">
-          Busca cualquier wallet para ver sus estadísticas de burn
+          ¿Cuánto has quemado? Ingresa tu wallet
           <br />
-          <span className="text-xs text-gray-600">(sin necesidad de conectar)</span>
+          <span className="text-xs text-gray-600">(sin conectar)</span>
         </p>
 
         <div className="flex gap-2 mb-4">
@@ -144,7 +144,7 @@ export function WalletLookup() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleLookup()}
-            placeholder="Ej: 3CsLCkKNEC9UrsycKdqo9BEPkBazgLWs52iNZbqjvXaQ"
+            placeholder="Tu dirección de wallet"
             disabled={loading}
             autoComplete="off"
             spellCheck="false"
@@ -155,7 +155,7 @@ export function WalletLookup() {
             disabled={loading || !address.trim()}
             className="btn-win98 btn-navy px-6 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? '🔄' : '🔍'}
+            {loading ? '⏳' : '🔍 BUSCAR'}
           </button>
         </div>
 
@@ -170,13 +170,13 @@ export function WalletLookup() {
         {stats && (
           <div className="border-t-2 border-gray-300 pt-4">
             <div className="bg-gray-50 p-4 mb-4">
-              <p className="text-xs text-gray-600 mb-1">Wallet:</p>
+              <p className="text-xs text-gray-600 mb-1">Tu wallet:</p>
               <p className="code-address text-xs break-all">{stats.address}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div className="text-center p-3 border-2 border-gray-300">
-                <p className="text-sm text-gray-600 mb-1">Rank</p>
+                <p className="text-sm text-gray-600 mb-1">Posición</p>
                 <p className="text-2xl font-bold text-navy">
                   {stats.rank === 1 && '🥇'}
                   {stats.rank === 2 && '🥈'}
@@ -195,7 +195,7 @@ export function WalletLookup() {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-3 bg-red-50 border-2 border-red-300">
-                <p className="text-sm text-gray-600 mb-1">Total Quemado</p>
+                <p className="text-sm text-gray-600 mb-1">Quemado</p>
                 <p className="text-xl font-bold text-red-600">
                   {formatNumber(stats.totalBurned)}
                 </p>
@@ -203,7 +203,7 @@ export function WalletLookup() {
               </div>
 
               <div className="text-center p-3 bg-orange-50 border-2 border-orange-300">
-                <p className="text-sm text-gray-600 mb-1">Burns Realizados</p>
+                <p className="text-sm text-gray-600 mb-1">Quemas</p>
                 <p className="text-xl font-bold text-orange-600">
                   {stats.burnCount}
                 </p>
@@ -213,7 +213,7 @@ export function WalletLookup() {
 
             <div className="mt-4 pt-4 border-t-2 border-gray-300">
               <p className="text-xs text-center text-gray-600 text-meme mb-4">
-                💡 Estos datos son públicos en la blockchain
+                💡 Datos públicos de blockchain
               </p>
               
               {/* CLAIM NFT SECTION - Solo si califica */}
@@ -222,12 +222,12 @@ export function WalletLookup() {
                   {/* SEGURIDAD DESTACADA */}
                   <div className="bg-green-50 border-2 border-green-500 p-4 rounded mb-4">
                     <p className="text-sm font-bold text-green-800 mb-2">
-                      🔒 <strong>PROCESO 100% SEGURO</strong>
+                      🔒 <strong>100% SEGURO</strong>
                     </p>
                     <ul className="text-xs text-green-700 space-y-1">
-                      <li>✅ <strong>NO conectamos tu wallet</strong> - Solo verificamos on-chain</li>
-                      <li>✅ <strong>Para quemar NO necesitas conectar</strong> - Solo envías desde tu wallet</li>
-                      <li>✅ <strong>Badge gratis</strong> - Solo firma mensaje (sin costo)</li>
+                      <li>✅ <strong>Solo lectura</strong> - Verificamos datos públicos</li>
+                      <li>✅ <strong>Sin fees</strong> - Medalla gratis</li>
+                      <li>✅ <strong>Sin transacciones</strong> - Solo firma mensaje</li>
                     </ul>
                   </div>
                   

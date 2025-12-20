@@ -73,11 +73,11 @@ export function BurnLeaderboard() {
     return (
       <div className="window-98 window-98-tie">
         <div className="window-titlebar">
-          <span>🏆 leaderboard.exe</span>
+          <span>🏆 Top Quemadores</span>
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content">
-          <p className="text-center text-meme py-8">Cargando DoggyQuemadores...</p>
+          <p className="text-center text-meme py-8">Cargando competidores...</p>
         </div>
       </div>
     );
@@ -86,7 +86,7 @@ export function BurnLeaderboard() {
   if (error) {
     return (
       <div className="panel-burnt text-center py-8">
-        <p className="text-meme-bold text-fire">❌ Error al cargar leaderboard</p>
+        <p className="text-meme-bold text-fire">❌ Error al cargar el ranking</p>
         <p className="text-meme text-sm mt-2">{error}</p>
       </div>
     );
@@ -96,11 +96,11 @@ export function BurnLeaderboard() {
     return (
       <div className="window-98 window-98-tie">
         <div className="window-titlebar">
-          <span>🏆 leaderboard.exe</span>
+          <span>🏆 Top Quemadores</span>
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content text-center py-8">
-          <p className="text-meme-bold">No hay DoggyQuemadores todavía</p>
+          <p className="text-meme-bold">No hay competidores todavía</p>
           <p className="text-meme text-sm mt-2">Sé el primero en quemar 🔥</p>
         </div>
       </div>
@@ -110,66 +110,106 @@ export function BurnLeaderboard() {
   return (
     <div className="window-98 window-98-tie">
       <div className="window-titlebar">
-        <span>🏆 leaderboard.exe - Top DoggyQuemadores</span>
+        <span>🏆 Top Quemadores - Los que se atreven</span>
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content p-0">
-        <table className="table-leaderboard">
-          <thead>
-            <tr>
-              <th className="w-16">#</th>
-              <th>DoggyQuemador</th>
-              <th className="text-right">Total Quemado</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map((entry, index) => {
-              const rank = index + 1;
-              const medal = getMedal(rank);
-              
-              return (
-                <tr key={entry.address}>
-                  <td className={getRankClass(rank)}>
-                    {medal || rank}
-                  </td>
-                  <td>
-                  <div className="flex items-center gap-3">
-                    {/* Mostrar imagen NFT solo si reclamó badge, sino insignia de texto */}
-                    {entry.hasBadge ? (
-                      <img 
-                        src={`/nfts/${entry.level}.png`}
-                        alt={entry.level}
-                        className="w-10 h-10 rounded-md shadow-sm"
-                      />
-                    ) : (
-                      <span className={`badge-small badge-${entry.level}`}>
-                        {entry.level === 'oro' ? 'ORO' : entry.level === 'plata' ? 'PLATA' : 'BRONCE'}
-                      </span>
-                    )}
-                    {/* Wallet */}
-                    <div>
-                      <span className="font-mono text-sm font-medium">
-                        {shortenAddress(entry.address)}
-                      </span>
-                      <span className="text-xs text-gray-400 ml-2">
-                        • {entry.burnCount}x burns
-                      </span>
-                    </div>
-                  </div>
-                </td>
-                <td className="text-right">
-                  <span className="font-bold text-lg">
-                    {formatBurned(entry.totalBurned)}
-                  </span>
-                  <span className="text-sm font-normal text-gray-600 ml-1">
-                    DOGGY
-                  </span>
-                </td>
+        
+        {/* Desktop Table */}
+        <div className="hidden md:block">
+          <table className="table-leaderboard">
+            <thead>
+              <tr>
+                <th className="w-16">#</th>
+                <th>Quemador</th>
+                <th className="text-right">Total Quemado</th>
               </tr>
-              );
-            })}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {leaderboard.map((entry, index) => {
+                const rank = index + 1;
+                const medal = getMedal(rank);
+                
+                return (
+                  <tr key={entry.address}>
+                    <td className={getRankClass(rank)}>
+                      {medal || rank}
+                    </td>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        {/* Badge más grande */}
+                        {entry.hasBadge ? (
+                          <div className="badge-display">
+                            <img 
+                              src={`/nfts/${entry.level}.png`}
+                              alt={entry.level}
+                              className="w-16 h-16 rounded-md shadow-sm border-2 border-gray-300"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded-md border-2 border-gray-200">
+                            <span className="text-xs text-gray-400">Sin<br/>badge</span>
+                          </div>
+                        )}
+                        {/* Wallet */}
+                        <div>
+                          <span className="font-mono text-sm font-medium">
+                            {shortenAddress(entry.address)}
+                          </span>
+                          <span className="text-xs text-gray-400 ml-2">
+                            • {entry.burnCount}x quemas
+                          </span>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="text-right">
+                      <span className="font-bold text-lg">
+                        {formatBurned(entry.totalBurned)}
+                      </span>
+                      <span className="text-sm font-normal text-gray-600 ml-1">
+                        DOGGY
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Mobile Cards */}
+        <div className="md:hidden p-4">
+          {leaderboard.map((entry, index) => (
+            <div key={entry.address} className="leaderboard-card">
+              <div className="card-header">
+                <div className="rank-badge">
+                  {getMedal(index + 1) || `#${index + 1}`}
+                </div>
+                {entry.hasBadge && (
+                  <img 
+                    src={`/nfts/${entry.level}.png`}
+                    alt={entry.level}
+                    className="badge-mobile"
+                  />
+                )}
+              </div>
+              
+              <div className="card-body">
+                <div className="wallet-mobile">
+                  {shortenAddress(entry.address)}
+                </div>
+                <div className="stats-mobile">
+                  <span className="burned-amount">
+                    {formatBurned(entry.totalBurned)} DOGGY
+                  </span>
+                  <span className="burn-count">
+                    {entry.burnCount} quemas
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

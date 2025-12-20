@@ -64,7 +64,7 @@ export function BurnStats() {
     return (
       <div className="window-98">
         <div className="window-titlebar">
-          <span>📊 estadisticas.exe</span>
+          <span>📊 Estadísticas Globales</span>
           <span>—  ▢  ✕</span>
         </div>
         <div className="window-content">
@@ -125,7 +125,7 @@ export function BurnStats() {
   return (
     <div className="window-98">
       <div className="window-titlebar">
-        <span>📊 estadisticas.exe - Actualizado</span>
+        <span>📊 Estadísticas Globales</span>
         <span>—  ▢  ✕</span>
       </div>
       <div className="window-content">
@@ -135,20 +135,20 @@ export function BurnStats() {
             <p className="number-stonks shake-money">
               {formatTokensDisplay(stats.totalBurned)} DOGGY
             </p>
-            <p className="text-meme">tokens quemados</p>
+            <p className="text-meme">quemados</p>
             <p className="text-xs text-gray-500 mt-1">
-              {formatExactTokens(stats.totalBurned)} tokens exactos
+              {formatExactTokens(stats.totalBurned)} exactos
             </p>
           </div>
 
           <div>
             <p className="number-stonks">
               <span className="dollar-sign dollar-md">$</span>
-              {estimateValueInUSD(stats.totalBurned).toFixed(2)} USD
+              {estimateValueInUSD(stats.totalBurned).toFixed(2)}
             </p>
             <p className="text-meme">valor destruido</p>
             <p className="text-xs text-gray-500 mt-1">
-              precio aproximado de mercado
+              precio mercado actual
             </p>
           </div>
 
@@ -156,9 +156,9 @@ export function BurnStats() {
             <p className="number-stonks number-red">
               {stats.totalBurners}
             </p>
-            <p className="text-meme">DoggyQuemadores activos</p>
+            <p className="text-meme">competidores</p>
             <p className="text-xs text-gray-500 mt-1">
-              {stats.totalTransactions} burns totales
+              {stats.totalTransactions} quemas totales
             </p>
           </div>
 
@@ -166,9 +166,9 @@ export function BurnStats() {
             <p className="number-stonks text-fire">
               {calculateDeflation(stats.totalBurned).toFixed(3)}%
             </p>
-            <p className="text-meme">del supply quemado</p>
+            <p className="text-meme">supply quemado</p>
             <p className="text-xs text-gray-500 mt-1">
-              Supply total: 1,000,000,000
+              de 1,000M totales
             </p>
           </div>
 
@@ -176,7 +176,7 @@ export function BurnStats() {
 
         <div className="mt-4 pt-4 border-t-2 border-gray-300">
           <p className="text-center text-xs text-gray-600 text-meme">
-            💡 Los datos se actualizan cada 30 segundos (maybe)
+            ⚡ Se actualiza cada 30 segundos
           </p>
         </div>
       </div>

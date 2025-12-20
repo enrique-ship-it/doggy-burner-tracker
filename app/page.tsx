@@ -17,8 +17,8 @@ export default function Home() {
         {/* MAIN CONTENT */}
         <main className="max-w-6xl mx-auto px-4 py-12">
           
-          {/* HERO - Explicación clara del propósito */}
-          <div className="text-center mb-12 max-h-[60vh]">
+          {/* HERO MEJORADO */}
+          <div className="text-center mb-12">
             <Image 
               src="/doggy.png" 
               alt="Doggy Bimsness" 
@@ -26,42 +26,81 @@ export default function Home() {
               height={180}
               className="doggy-mascot-lg mx-auto mb-4"
             />
-            <h2 className="title-meme text-3xl mb-2">
-              <span className="fire-emoji">🔥</span> DOGGY BURN TRACKER <span className="fire-emoji">🔥</span>
-            </h2>
-            <p className="subtitle-meme-enhanced text-lg mb-4">
-              La competencia oficial de quema de tokens DOGGY
+            <h1 className="title-meme text-4xl md:text-5xl mb-3">
+              <span className="fire-emoji">🔥</span> EL RANKING DE LOS QUE SE ATREVEN <span className="fire-emoji">🔥</span>
+            </h1>
+            <p className="subtitle-meme-enhanced text-xl md:text-2xl mb-6">
+              ¿Cuántos DOGGY te atreves a quemar?
             </p>
             
-            {/* Propuesta de valor clara + SEGURIDAD */}
-            <div className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm p-6 rounded-lg border-2 border-gray-300 shadow-lg mb-6">
-              <p className="text-meme text-base mb-3">
-                <strong>¿Qué es esto?</strong> El leaderboard oficial donde la comunidad DOGGY compite quemando tokens.
-              </p>
-              <p className="text-meme text-base mb-3">
-                <strong>¿Qué ganas?</strong> Apareces en el ranking público, reduces el supply, te conviertes en DoggyQuemador 🏆 <strong>y recibes tu badge conmemorativo "The Doggy Burner"</strong> 🔥
-              </p>
-              
-              {/* SEGURIDAD DESTACADA */}
-              <div className="bg-green-50 border-2 border-green-500 p-4 rounded mt-4 mb-3">
-                <p className="text-sm font-bold text-green-800 mb-2">
-                  🔒 <strong>100% SEGURO - SOLO VES LOS BURNS</strong>
-                </p>
-                <p className="text-xs text-green-700">
-                  Nunca te pedimos conectar tu wallet. Todo es manual y verificable on-chain. 
-                  Tu wallet, tu control total.
-                </p>
+            <p className="text-meme text-lg mb-6 text-gray-700">
+              Compite, sube al top, y recibe tu medalla de honor 🏆
+            </p>
+
+            {/* Microcopy con stats */}
+            <div className="flex flex-wrap justify-center gap-6 mb-8 text-sm font-medium text-gray-600">
+              <span>💎 +12M DOGGY quemados</span>
+              <span>🔥 157 competidores</span>
+              <span>⚡ Actualización en tiempo real</span>
+            </div>
+
+            {/* BENEFICIOS CON ICONOS */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8">
+              <div className="benefit-card">
+                <span className="text-4xl mb-3 block">🏆</span>
+                <h3 className="benefit-title">Entra al Top</h3>
+                <p className="benefit-text">Compite con la comunidad y escala posiciones</p>
               </div>
               
-              <p className="text-meme text-sm text-gray-600">
-                Cuantos más DOGGY quemes, más alto subes en el leaderboard. Simple.
-              </p>
+              <div className="benefit-card">
+                <span className="text-4xl mb-3 block">🎖️</span>
+                <h3 className="benefit-title">Medalla Exclusiva</h3>
+                <p className="benefit-text">Demuestra tu lealtad con tu badge personalizado</p>
+              </div>
+              
+              <div className="benefit-card">
+                <span className="text-4xl mb-3 block">💎</span>
+                <h3 className="benefit-title">Recompensas Futuras</h3>
+                <p className="benefit-text">Acceso prioritario a drops y beneficios</p>
+              </div>
+            </div>
+
+            {/* SEGURIDAD DESTACADA HERO */}
+            <div className="security-badge-hero max-w-2xl mx-auto mb-8">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-5xl">🔒</span>
+                <div className="text-left">
+                  <h3 className="security-title">100% SEGURO</h3>
+                  <p className="security-subtitle">Tu wallet, tu control</p>
+                </div>
+              </div>
+              
+              <div className="security-features">
+                <div className="feature">
+                  <span className="checkmark">✓</span>
+                  <span>Sin firma de transacciones</span>
+                </div>
+                <div className="feature">
+                  <span className="checkmark">✓</span>
+                  <span>Datos públicos on-chain</span>
+                </div>
+                <div className="feature">
+                  <span className="checkmark">✓</span>
+                  <span>Medalla GRATIS (solo firmas mensaje)</span>
+                </div>
+              </div>
             </div>
             
-            {/* CTA Principal */}
-            <a href="#burn" className="btn-win98 btn-tie btn-xl inline-block">
-              🔥 Ver Cómo Participar
-            </a>
+            {/* CTAs MEJORADOS */}
+            <div className="cta-group">
+              <a href="#burn" className="cta-primary">
+                🔥 QUIERO COMPETIR
+              </a>
+              
+              <a href="#leaderboard" className="cta-secondary">
+                👀 Solo quiero ver el ranking
+              </a>
+            </div>
           </div>
 
           {/* STATS - Muestra el estado del juego */}

@@ -551,6 +551,661 @@ body {
 }
 
 /* ===========================================
+   NUEVOS COMPONENTES UX MEJORADO
+   =========================================== */
+
+/* Benefit Cards */
+.benefit-card {
+  background: white;
+  border: 3px solid var(--suit-navy);
+  padding: 24px;
+  text-align: center;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+}
+
+.benefit-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+}
+
+.benefit-title {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--dollar-green);
+  margin: 0 0 8px 0;
+}
+
+.benefit-text {
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Security Badge Hero */
+.security-badge-hero {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 3px solid #28a745;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+}
+
+.security-title {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1.75rem;
+  color: #155724;
+  margin: 0;
+}
+
+.security-subtitle {
+  color: #155724;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.security-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #155724;
+}
+
+.checkmark {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* CTAs Mejorados */
+.cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .cta-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.cta-primary {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding: 16px 48px;
+  background: linear-gradient(135deg, #ff6b35 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.6);
+}
+
+.cta-secondary {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 12px 32px;
+  background: white;
+  color: var(--suit-navy);
+  border: 2px solid var(--suit-navy);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-secondary:hover {
+  background: var(--suit-navy);
+  color: white;
+}
+
+/* Mobile Leaderboard Cards */
+.leaderboard-mobile {
+  display: block;
+}
+
+.leaderboard-card {
+  background: white;
+  border: 2px solid var(--suit-navy);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.rank-badge {
+  background: var(--fire-red);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-family: 'Comic Neue', cursive;
+}
+
+.badge-mobile {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.wallet-mobile {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.stats-mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.burned-amount {
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--dollar-green);
+}
+
+.burn-count {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+/* Badge Display mejorado */
+.badge-display {
+  position: relative;
+  display: inline-block;
+}
+
+.badge-display img {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border: 2px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .badge-display img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+}
+
+/* ClaimBadge Enhanced */
+.claim-section {
+  background: white;
+  border: 3px solid var(--suit-navy);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.claim-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--suit-navy);
+  line-height: 1.3;
+}
+
+.claim-subtitle {
+  font-size: 1.5rem;
+  color: var(--fire);
+  background: linear-gradient(90deg, var(--fire) 0%, #ff8c42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.claim-value-props {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.value-prop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f9fa;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 2px solid #e0e0e0;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  color: var(--suit-navy);
+}
+
+.value-prop .icon {
+  font-size: 1.5rem;
+}
+
+.btn-claim-mega {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: var(--suit-navy);
+  border: 4px solid var(--suit-navy);
+  padding: 20px 48px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 12px;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-claim-mega:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.25);
+  background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%);
+}
+
+.btn-claim-mega:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+}
+
+.btn-claim-mega:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.trust-signals {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: 'Comic Neue', cursive;
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-top: 16px;
+}
+
+.trust-signals span {
+  background: #f8f9fa;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.security-note {
+  font-family: 'Comic Neue', cursive;
+  font-size: 0.875rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  margin-top: 16px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.connect-prompt {
+  padding: 32px;
+}
+
+@media (max-width: 768px) {
+  .claim-title {
+    font-size: 1.5rem;
+  }
+  
+  .claim-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .btn-claim-mega {
+    padding: 16px 32px;
+    font-size: 1.25rem;
+  }
+  
+  .value-prop {
+    font-size: 0.875rem;
+    padding: 10px 16px;
+  }
+}
+
+/* HowToBurn Simplificado */
+.how-to-section {
+  background: white;
+  border: 3px solid var(--suit-navy);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.how-to-content {
+  padding: 32px;
+}
+
+.how-to-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--suit-navy);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.step-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border: 3px solid var(--suit-navy);
+  border-radius: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.15);
+}
+
+.step-number {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 48px;
+  background: var(--fire);
+  border: 3px solid var(--suit-navy);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin: 16px 0;
+}
+
+.step-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--suit-navy);
+  margin-bottom: 8px;
+}
+
+.step-description {
+  font-size: 0.875rem;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
+.burn-address-mega {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+  border: 4px solid var(--fire);
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.address-display {
+  background: white;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.btn-copy-mega {
+  width: 100%;
+  background: var(--fire);
+  color: white;
+  border: 3px solid var(--suit-navy);
+  padding: 16px 32px;
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.125rem;
+  font-weight: 700;
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-copy-mega:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+}
+
+.btn-copy-mega.copied {
+  background: var(--dollar-green);
+  animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.verify-link {
+  color: var(--fire);
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.verify-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.tiers-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.tiers-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--suit-navy);
+  text-align: center;
+}
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.tier-card {
+  background: white;
+  border: 3px solid;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.tier-card:hover {
+  transform: translateY(-4px);
+}
+
+.tier-bronce {
+  border-color: #cd7f32;
+  background: linear-gradient(135deg, #fff 0%, #fff5e5 100%);
+}
+
+.tier-plata {
+  border-color: #c0c0c0;
+  background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
+}
+
+.tier-oro {
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #fff 0%, #fffacd 100%);
+}
+
+.tier-badge-container {
+  position: relative;
+}
+
+.tier-badge {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.most-popular {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: var(--fire);
+  color: white;
+  font-size: 0.625rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.tier-amount {
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  color: var(--suit-navy);
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+.tier-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.security-mega {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  border: 3px solid #28a745;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.security-title {
+  font-family: 'Comic Neue', cursive;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #155724;
+  margin-bottom: 16px;
+}
+
+.security-checks {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 600;
+  color: #155724;
+  font-size: 0.875rem;
+}
+
+.security-checks span {
+  background: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 2px solid #28a745;
+}
+
+.warning-mega {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 3px solid #ffc107;
+  border-radius: 12px;
+  padding: 20px;
+  font-family: 'Comic Neue', cursive;
+  color: #856404;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .how-to-content {
+    padding: 24px 16px;
+  }
+  
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .security-checks {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* ===========================================
    UTILIDADES
    =========================================== */
 
